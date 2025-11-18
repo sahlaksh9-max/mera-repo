@@ -396,57 +396,90 @@ const StudentDashboard = () => {
       return;
     }
 
-    // Demo mode - simulate payment processing
-    const processingAlert = setTimeout(() => {
-      alert('Processing payment... Please wait.');
-    }, 500);
+    if (paymentForm.paymentMethod === 'razorpay') {
+      // Load Razorpay script
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.async = true;
+      script.onload = () => {
+        const options = {
+          key: 'rzp_test_1DP5mmOlF5G5ag', // Your Razorpay test key
+          amount: selectedPaymentRequest.amount * 100, // Convert to paise
+          currency: 'INR',
+          name: 'Royal Academy',
+          description: `Fee Payment - ${selectedPaymentRequest.months.join(', ')}`,
+          prefill: {
+            name: studentData.fullName,
+            email: studentData.email,
+            contact: ''
+          },
+          theme: {
+            color: '#FFB81C'
+          },
+          handler: async function (response: any) {
+            console.log('[StudentDashboard] Razorpay Payment successful:', response);
+            
+            // Update fee records to paid status
+            const updatedFeeRecords = feeRecords.map(fee => {
+              if (selectedPaymentRequest.months.includes(fee.month) && fee.status === 'pending') {
+                return {
+                  ...fee,
+                  status: 'paid' as const,
+                  paymentDate: new Date().toISOString()
+                };
+              }
+              return fee;
+            });
+            
+            setFeeRecords(updatedFeeRecords);
+            const allFeeRecords = JSON.parse(localStorage.getItem('royal-academy-fee-records') || '[]').map((fee: FeeRecord) => {
+              const updatedFee = updatedFeeRecords.find(f => f.id === fee.id);
+              return updatedFee || fee;
+            });
+            localStorage.setItem('royal-academy-fee-records', JSON.stringify(allFeeRecords));
+            // Write to Supabase for real-time sync
+            await setSupabaseData('royal-academy-fee-records', allFeeRecords);
 
-    setTimeout(async () => {
-      clearTimeout(processingAlert);
+            // Update payment request status
+            const updatedPaymentRequests = paymentRequests.map(req => 
+              req.id === selectedPaymentRequest.id 
+                ? { ...req, status: 'paid' as const }
+                : req
+            );
+            
+            setPaymentRequests(updatedPaymentRequests);
+            const allPaymentRequests = JSON.parse(localStorage.getItem('royal-academy-payment-requests') || '[]').map((req: PaymentRequest) => {
+              const updatedReq = updatedPaymentRequests.find(r => r.id === req.id);
+              return updatedReq || req;
+            });
+            localStorage.setItem('royal-academy-payment-requests', JSON.stringify(allPaymentRequests));
+            // Write to Supabase for real-time sync
+            await setSupabaseData('royal-academy-payment-requests', allPaymentRequests);
 
-      // Update fee records to paid status
-      const updatedFeeRecords = feeRecords.map(fee => {
-        if (selectedPaymentRequest.months.includes(fee.month) && fee.status === 'pending') {
-          return {
-            ...fee,
-            status: 'paid' as const,
-            paymentDate: new Date().toISOString()
-          };
-        }
-        return fee;
-      });
-      
-      setFeeRecords(updatedFeeRecords);
-      const allFeeRecords = JSON.parse(localStorage.getItem('royal-academy-fee-records') || '[]').map((fee: FeeRecord) => {
-        const updatedFee = updatedFeeRecords.find(f => f.id === fee.id);
-        return updatedFee || fee;
-      });
-      localStorage.setItem('royal-academy-fee-records', JSON.stringify(allFeeRecords));
-      // Write to Supabase for real-time sync
-      await setSupabaseData('royal-academy-fee-records', allFeeRecords);
+            alert(`✅ Payment Successful!\n\nPayment ID: ${response.razorpay_payment_id}\nAmount: ₹${selectedPaymentRequest.amount}\nMonths: ${selectedPaymentRequest.months.join(', ')}\n\nYour fees have been updated.`);
+            
+            setShowPaymentModal(false);
+            setSelectedPaymentRequest(null);
+            setPaymentForm({ amount: '', paymentMethod: 'online', notes: '' });
+          },
+          modal: {
+            ondismiss: () => {
+              alert('Payment cancelled. You can try again.');
+            }
+          }
+        };
 
-      // Update payment request status
-      const updatedPaymentRequests = paymentRequests.map(req => 
-        req.id === selectedPaymentRequest.id 
-          ? { ...req, status: 'paid' as const }
-          : req
-      );
-      
-      setPaymentRequests(updatedPaymentRequests);
-      const allPaymentRequests = JSON.parse(localStorage.getItem('royal-academy-payment-requests') || '[]').map((req: PaymentRequest) => {
-        const updatedReq = updatedPaymentRequests.find(r => r.id === req.id);
-        return updatedReq || req;
-      });
-      localStorage.setItem('royal-academy-payment-requests', JSON.stringify(allPaymentRequests));
-      // Write to Supabase for real-time sync
-      await setSupabaseData('royal-academy-payment-requests', allPaymentRequests);
-
-      alert(`✅ Demo Payment Successful!\n\nAmount: ₹${selectedPaymentRequest.amount}\nMonths: ${selectedPaymentRequest.months.join(', ')}\n\nNote: This is a demo payment. In production, integrate your Razorpay API key.`);
-      
-      setShowPaymentModal(false);
-      setSelectedPaymentRequest(null);
-      setPaymentForm({ amount: '', paymentMethod: 'online', notes: '' });
-    }, 2000);
+        const razorpay = new (window as any).Razorpay(options);
+        razorpay.open();
+      };
+      script.onerror = () => {
+        alert('Failed to load Razorpay. Please try again.');
+      };
+      document.head.appendChild(script);
+    } else {
+      // Fallback for other payment methods
+      alert('Please select Razorpay as payment method');
+    }
   };
 
   useEffect(() => {

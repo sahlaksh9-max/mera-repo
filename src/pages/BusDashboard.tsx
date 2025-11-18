@@ -612,7 +612,7 @@ const BusDashboard: React.FC = () => {
       } else {
         setGpsError('Location error. Please enable GPS and try again.');
       }
-    }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 30000 });
+    }, { enableHighAccuracy: true, maximumAge: 50, timeout: 30000 });
     setWatchId(id as unknown as number);
   };
 

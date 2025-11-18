@@ -491,7 +491,7 @@ const StudentTrackBus: React.FC = () => {
       }
     };
     
-    const interval = setInterval(updateLocation, 5000);
+    const interval = setInterval(updateLocation, 50);
     return () => clearInterval(interval);
   }, [autoTracking, busLoc]);
 
@@ -518,7 +518,7 @@ const StudentTrackBus: React.FC = () => {
       } catch (e) {
         console.error('Failed to fetch bus location:', e);
       }
-    }, 5000);
+    }, 50);
 
     return () => clearInterval(interval);
   }, [myAssignment?.busId, busLoc]);

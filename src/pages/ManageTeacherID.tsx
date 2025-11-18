@@ -278,39 +278,42 @@ const ManageTeacherID: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-royal via-royal/90 to-gold/20 p-4">
       <div className="container mx-auto max-w-7xl">
-        {/* Header */}
+        {/* Header Card */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4"
+          className="bg-card/95 backdrop-blur-md border border-border/50 rounded-lg mb-6 p-4 sm:p-6"
         >
-          <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigate('/principal-dashboard')}
-              className="rounded-full text-white hover:bg-white/10"
-              title="Go Back"
-            >
-              <ArrowLeft className="h-4 w-4" />
-            </Button>
-            <div>
-              <h1 className="text-2xl font-bold text-white">Manage Teacher IDs</h1>
-              <p className="text-white/80">Manage teacher login credentials and access control</p>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="flex items-start sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate('/principal-dashboard')}
+                className="rounded-full text-white hover:bg-white/10 flex-shrink-0"
+                title="Go Back"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </Button>
+              <div className="flex-1 min-w-0">
+                <h1 className="text-xl sm:text-2xl font-bold text-white truncate">Manage Teacher IDs</h1>
+                <p className="text-xs sm:text-sm text-white/80">Manage login credentials and access</p>
+              </div>
             </div>
+            <Button 
+              onClick={() => navigate('/create-teacher-id')} 
+              variant="outline"
+              className="gap-2 text-white border-white/20 hover:bg-white/10 w-full sm:w-auto"
+            >
+              <Plus className="h-4 w-4" />
+              <span className="hidden sm:inline">Go to Create</span>
+              <span className="sm:hidden">Create</span>
+            </Button>
           </div>
-          <Button 
-            onClick={() => navigate('/create-teacher-id')} 
-            variant="outline"
-            className="gap-2 text-white border-white/20 hover:bg-white/10"
-          >
-            <Plus className="h-4 w-4" />
-            Go to Create Teacher ID
-          </Button>
         </motion.div>
 
         {/* Statistics Cards */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -318,11 +321,11 @@ const ManageTeacherID: React.FC = () => {
           >
             <Card className="bg-card/95 backdrop-blur-md border-border/50">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Teacher IDs</CardTitle>
-                <Key className="h-4 w-4 text-muted-foreground" />
+                <CardTitle className="text-xs sm:text-sm font-medium">Total Teacher IDs</CardTitle>
+                <Key className="h-4 w-4 text-muted-foreground flex-shrink-0" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{teachers.length}</div>
+                <div className="text-xl sm:text-2xl font-bold">{teachers.length}</div>
                 <p className="text-xs text-muted-foreground">Total registered IDs</p>
               </CardContent>
             </Card>
@@ -335,11 +338,11 @@ const ManageTeacherID: React.FC = () => {
           >
             <Card className="bg-card/95 backdrop-blur-md border-border/50">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Active IDs</CardTitle>
-                <CheckCircle className="h-4 w-4 text-green-500" />
+                <CardTitle className="text-xs sm:text-sm font-medium">Active IDs</CardTitle>
+                <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{teachers.filter(t => t.status === 'active').length}</div>
+                <div className="text-xl sm:text-2xl font-bold">{teachers.filter(t => t.status === 'active').length}</div>
                 <p className="text-xs text-muted-foreground">Can login</p>
               </CardContent>
             </Card>
@@ -352,11 +355,11 @@ const ManageTeacherID: React.FC = () => {
           >
             <Card className="bg-card/95 backdrop-blur-md border-border/50">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Banned IDs</CardTitle>
-                <XCircle className="h-4 w-4 text-red-500" />
+                <CardTitle className="text-xs sm:text-sm font-medium">Banned IDs</CardTitle>
+                <XCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{teachers.filter(t => t.status === 'banned').length}</div>
+                <div className="text-xl sm:text-2xl font-bold">{teachers.filter(t => t.status === 'banned').length}</div>
                 <p className="text-xs text-muted-foreground">Access blocked</p>
               </CardContent>
             </Card>
@@ -369,11 +372,11 @@ const ManageTeacherID: React.FC = () => {
           >
             <Card className="bg-card/95 backdrop-blur-md border-border/50">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Login Issues</CardTitle>
-                <AlertTriangle className="h-4 w-4 text-yellow-500" />
+                <CardTitle className="text-xs sm:text-sm font-medium">Login Issues</CardTitle>
+                <AlertTriangle className="h-4 w-4 text-yellow-500 flex-shrink-0" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{teachers.filter(t => t.loginAttempts > 3).length}</div>
+                <div className="text-xl sm:text-2xl font-bold">{teachers.filter(t => t.loginAttempts > 3).length}</div>
                 <p className="text-xs text-muted-foreground">Failed attempts</p>
               </CardContent>
             </Card>
@@ -388,17 +391,17 @@ const ManageTeacherID: React.FC = () => {
         >
           <Card className="bg-card/95 backdrop-blur-md border-border/50">
             <CardHeader>
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div className="flex flex-col gap-4">
                 <div>
-                  <CardTitle>Teacher Login IDs</CardTitle>
-                  <CardDescription>Manage teacher authentication credentials and access</CardDescription>
+                  <CardTitle className="text-lg sm:text-xl">Teacher Login IDs</CardTitle>
+                  <CardDescription className="text-xs sm:text-sm">Manage teacher authentication credentials and access</CardDescription>
                 </div>
-                <div className="relative w-full sm:w-auto">
+                <div className="relative w-full">
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                   <Input
                     type="search"
                     placeholder="Search by name, email, or ID..."
-                    className="w-full sm:w-64 pl-8"
+                    className="w-full pl-8 text-sm"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />

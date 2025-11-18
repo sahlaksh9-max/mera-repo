@@ -356,16 +356,56 @@ const Admissions = () => {
   const processRazorpayPayment = async () => {
     setPaymentProcessing(true);
     try {
-      // Demo mode - simulate payment success after 2 seconds
-      setTimeout(() => {
-        setPaymentSuccess(true);
+      // Load Razorpay script
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.async = true;
+      script.onload = () => {
+        const options = {
+          key: 'rzp_test_1DP5mmOlF5G5ag', // Your Razorpay test key
+          amount: getCurrentAmountInPaise(),
+          currency: 'INR',
+          name: 'Royal Academy',
+          description: `${subscriptionType.charAt(0).toUpperCase() + subscriptionType.slice(1)} Subscription`,
+          prefill: {
+            name: `${formData.firstName} ${formData.lastName}`,
+            email: formData.email,
+            contact: formData.phone
+          },
+          theme: {
+            color: '#FFB81C'
+          },
+          handler: async function (response) {
+            console.log('[Razorpay] Payment successful:', response);
+            setPaymentSuccess(true);
+            setPaymentProcessing(false);
+            await handleFormSubmission('paid', 'razorpay');
+            alert(`Payment Successful! ✅
+
+Payment ID: ${response.razorpay_payment_id}
+Amount: ₹${getCurrentAmount()}
+Status: Completed`);
+          },
+          modal: {
+            ondismiss: () => {
+              setPaymentProcessing(false);
+              alert('Payment cancelled. You can try again.');
+            }
+          }
+        };
+
+        const razorpay = new (window as any).Razorpay(options);
+        razorpay.open();
+      };
+      script.onerror = () => {
         setPaymentProcessing(false);
-        handleFormSubmission('paid', 'razorpay');
-        alert('Demo Payment Successful! ✅\n\nThis is a demo payment. In production, integrate your Razorpay API key.');
-      }, 2000);
+        alert('Failed to load Razorpay. Please try again.');
+      };
+      document.head.appendChild(script);
     } catch (error) {
       setPaymentProcessing(false);
       alert('Payment failed. Please try again.');
+      console.error('[Razorpay] Error:', error);
     }
   };
 

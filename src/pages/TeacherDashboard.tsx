@@ -4501,13 +4501,6 @@ Student ID: ${studentId}`);
                   <CreditCard className="h-4 w-4 mr-2" />
                   Create Payment Request
                 </Button>
-                <Button
-                  onClick={() => redirectToStudentPayment(selectedStudentForPayment.id)}
-                  className="flex-1 bg-gradient-to-r from-gold to-yellow-500 text-black"
-                >
-                  <DollarSign className="h-4 w-4 mr-2" />
-                  Pay Online
-                </Button>
               </div>
             </div>
           </motion.div>
