@@ -1,0 +1,98 @@
+
+.academic-banner-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(180deg, #0a0a0f 0%, #14141f 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.academic-banner-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.academic-banner-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 0 2rem;
+  max-width: 900px;
+}
+
+.academic-banner-title {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.academic-banner-highlight {
+  background: linear-gradient(135deg, hsl(45 96% 65%), hsl(45 86% 55%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.academic-banner-description {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .academic-banner-wrapper {
+    height: 300px;
+  }
+
+  .academic-banner-title {
+    font-size: 2.25rem;
+  }
+
+  .academic-banner-description {
+    font-size: 1rem;
+  }
+
+  .academic-banner-content {
+    padding: 0 1.25rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .academic-banner-wrapper {
+    height: 280px;
+  }
+
+  .academic-banner-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .academic-banner-description {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+/* Performance mode - disable animations */
+.performance-mode .academic-banner-canvas {
+  display: none;
+}
+
+.performance-mode .academic-banner-wrapper {
+  background: linear-gradient(180deg, #0a0a0f 0%, #14141f 100%);
+}

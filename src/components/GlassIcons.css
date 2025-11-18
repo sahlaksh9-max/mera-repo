@@ -1,0 +1,100 @@
+
+.glass-icons-container {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.glass-icon-btn {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.glass-icon-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.1));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glass-icon-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 8px 16px rgba(255, 215, 0, 0.2);
+}
+
+.glass-icon-btn:hover::before {
+  opacity: 1;
+}
+
+.glass-icon-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.glass-icon-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+}
+
+.glass-icon-btn:hover .glass-icon-inner {
+  color: #FFD700;
+}
+
+.glass-icon-inner svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .glass-icons-container {
+    gap: 0.5rem;
+  }
+
+  .glass-icon-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .glass-icon-inner svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+}
+
+/* Reduce animations on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  .glass-icon-btn {
+    transition: none;
+  }
+  
+  .glass-icon-btn:hover {
+    transform: none;
+  }
+}

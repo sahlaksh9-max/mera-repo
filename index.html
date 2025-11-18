@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Royal Academy - Excellence in Education</title>
+    <meta name="description" content="Royal Academy - A prestigious institution providing world-class education with 148+ years of excellence. Discover our legacy of academic achievement and character development." />
+    <meta name="author" content="Royal Academy" />
+    <link rel="canonical" href="" />
+
+    <!-- Mobile enhancements -->
+    <meta name="theme-color" content="#0d1017" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" type="image/svg+xml" href="/placeholder.svg" />
+
+    <meta property="og:title" content="Royal Academy - Excellence in Education" />
+    <meta property="og:description" content="Prestigious education institution with 148+ years of excellence. Discover our world-class academics and character development programs." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="Royal Academy" />
+    <meta name="twitter:image" content="" />
+  </head>
+
+  <body style="margin: 0; padding: 0; background-color: #0d1017; color: #f8fafc;">
+    <div id="root"></div>
+    <!-- Payment Gateway Scripts (loaded conditionally when needed) -->
+    <script type="module" src="/src/main.tsx"></script>
+    <script type="text/javascript">
+    (function (l) {
+      if (l.search[1] === "/") {
+        var decoded = l.search
+          .slice(1)
+          .split("&")
+          .map(function (s) {
+            return s.replace(/~and~/g, "&");
+          })
+          .join("?");
+        window.history.replaceState(
+          null,
+          null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    })(window.location);
+  </script>
+  </body>
+</html>
