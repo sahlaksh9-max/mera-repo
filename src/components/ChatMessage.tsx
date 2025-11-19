@@ -38,7 +38,7 @@ export const ChatMessage = ({ message, onEdit, onCancelEdit }: ChatMessageProps)
   };
 
   return (
-    <div className={`flex gap-4 p-4 ${message.role === "user" ? "bg-blue-50 dark:bg-blue-950/20" : "bg-white dark:bg-gray-900"}`}>
+    <div className={`flex gap-4 p-4 rounded-lg ${message.role === "user" ? "bg-blue-900/30 border border-blue-700" : "bg-gray-900/50 border border-gray-700"}`}>
       <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
         message.role === "user" 
           ? "bg-blue-600 text-white" 
@@ -49,14 +49,14 @@ export const ChatMessage = ({ message, onEdit, onCancelEdit }: ChatMessageProps)
       
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-2">
-          <span className="font-semibold text-sm">
+          <span className="font-semibold text-sm text-white">
             {message.role === "user" ? "You" : "AI Assistant"}
           </span>
-          <span className="text-xs text-gray-500">
+          <span className="text-xs text-gray-400">
             {message.timestamp.toLocaleTimeString()}
           </span>
           {message.isEdited && (
-            <span className="text-xs text-gray-400 italic">(edited)</span>
+            <span className="text-xs text-gray-500 italic">(edited)</span>
           )}
         </div>
 
@@ -67,7 +67,7 @@ export const ChatMessage = ({ message, onEdit, onCancelEdit }: ChatMessageProps)
                 key={idx}
                 src={img}
                 alt={`Uploaded ${idx + 1}`}
-                className="max-w-xs max-h-48 rounded-lg border border-gray-200 dark:border-gray-700"
+                className="max-w-xs max-h-48 rounded-lg border border-gray-600"
               />
             ))}
           </div>
@@ -78,22 +78,22 @@ export const ChatMessage = ({ message, onEdit, onCancelEdit }: ChatMessageProps)
             <Textarea
               value={editedContent}
               onChange={(e) => setEditedContent(e.target.value)}
-              className="min-h-24 bg-white dark:bg-gray-800"
+              className="min-h-24 bg-gray-800 text-white border-gray-600"
               autoFocus
             />
             <div className="flex gap-2">
-              <Button size="sm" onClick={handleSaveEdit}>
+              <Button size="sm" onClick={handleSaveEdit} className="bg-blue-600 hover:bg-blue-700 text-white">
                 <Save className="w-4 h-4 mr-1" />
                 Save
               </Button>
-              <Button size="sm" variant="outline" onClick={handleCancelEdit}>
+              <Button size="sm" variant="outline" onClick={handleCancelEdit} className="border-gray-600 text-white hover:bg-gray-800">
                 <X className="w-4 h-4 mr-1" />
                 Cancel
               </Button>
             </div>
           </div>
         ) : (
-          <div className="prose dark:prose-invert max-w-none">
+          <div className="prose prose-invert max-w-none">
             <ReactMarkdown
               components={{
                 code({ className, children, ...props }: any) {
@@ -141,7 +141,7 @@ export const ChatMessage = ({ message, onEdit, onCancelEdit }: ChatMessageProps)
           <Button
             size="sm"
             variant="ghost"
-            className="mt-2"
+            className="mt-2 text-gray-300 hover:text-white hover:bg-gray-800"
             onClick={() => setIsEditing(true)}
           >
             <Edit2 className="w-3 h-3 mr-1" />

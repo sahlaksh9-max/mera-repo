@@ -339,10 +339,10 @@ export default function StudentAIAssistant() {
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
-      <div className="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 flex flex-col">
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-          <Button onClick={handleNewChat} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+    <div className="flex h-screen bg-black">
+      <div className="w-64 bg-gray-900 border-r border-gray-700 flex flex-col">
+        <div className="p-4 border-b border-gray-700">
+          <Button onClick={handleNewChat} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
             <Plus className="w-4 h-4 mr-2" />
             New Chat
           </Button>
@@ -354,8 +354,8 @@ export default function StudentAIAssistant() {
               key={session.id}
               className={`p-3 mb-2 rounded-lg cursor-pointer transition-colors ${
                 currentSessionId === session.id
-                  ? "bg-blue-100 dark:bg-blue-900"
-                  : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                  ? "bg-blue-900 text-white"
+                  : "hover:bg-gray-800 text-gray-300"
               }`}
               onClick={() => setCurrentSessionId(session.id)}
             >
@@ -377,12 +377,12 @@ export default function StudentAIAssistant() {
               ) : (
                 <div>
                   <div className="flex items-center justify-between">
-                    <MessageSquare className="w-4 h-4 text-gray-500" />
+                    <MessageSquare className="w-4 h-4 text-gray-400" />
                     <div className="flex gap-1">
                       <Button
                         size="sm"
                         variant="ghost"
-                        className="h-6 w-6 p-0"
+                        className="h-6 w-6 p-0 text-gray-300 hover:text-white"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleRenameSession(session.id, session.name);
@@ -393,7 +393,7 @@ export default function StudentAIAssistant() {
                       <Button
                         size="sm"
                         variant="ghost"
-                        className="h-6 w-6 p-0 text-red-500 hover:text-red-700"
+                        className="h-6 w-6 p-0 text-red-400 hover:text-red-300"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDeleteSession(session.id);
@@ -403,8 +403,8 @@ export default function StudentAIAssistant() {
                       </Button>
                     </div>
                   </div>
-                  <p className="text-sm font-medium mt-1 truncate">{session.name}</p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-sm font-medium mt-1 truncate text-white">{session.name}</p>
+                  <p className="text-xs text-gray-400">
                     {session.messages.length} messages
                   </p>
                 </div>
@@ -413,10 +413,10 @@ export default function StudentAIAssistant() {
           ))}
         </ScrollArea>
 
-        <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="p-4 border-t border-gray-700">
           <Button
             variant="destructive"
-            className="w-full"
+            className="w-full bg-red-600 hover:bg-red-700 text-white"
             onClick={handleClearAllChats}
           >
             <Trash2 className="w-4 h-4 mr-2" />
@@ -426,19 +426,19 @@ export default function StudentAIAssistant() {
       </div>
 
       <div className="flex-1 flex flex-col">
-        <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 p-4 flex items-center justify-between">
+        <div className="bg-gray-900 border-b border-gray-700 p-4 flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               AI Assistant
             </h1>
-            <p className="text-sm text-gray-500">Powered by Gemini 2.0 Flash</p>
+            <p className="text-sm text-gray-400">Powered by Gemini 2.0 Flash</p>
           </div>
           
           <Select value={language} onValueChange={setLanguage}>
-            <SelectTrigger className="w-48">
+            <SelectTrigger className="w-48 bg-gray-800 text-white border-gray-700">
               <SelectValue placeholder="Select language" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-gray-800 text-white border-gray-700">
               <SelectItem value="en">English</SelectItem>
               <SelectItem value="indian-english">Indian English</SelectItem>
               <SelectItem value="hinglish">Hinglish</SelectItem>
@@ -447,34 +447,34 @@ export default function StudentAIAssistant() {
           </Select>
         </div>
 
-        <ScrollArea className="flex-1 p-4">
+        <ScrollArea className="flex-1 p-4 bg-black">
           {currentSession?.messages.length === 0 ? (
             <div className="h-full flex items-center justify-center">
               <div className="text-center max-w-md">
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <MessageSquare className="w-8 h-8 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold mb-2 text-gray-800 dark:text-white">Welcome to AI Assistant</h2>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                <h2 className="text-2xl font-bold mb-2 text-white">Welcome to AI Assistant</h2>
+                <p className="text-gray-300 mb-4">
                   I can help you with coding, answer questions, analyze images, transcribe audio, and search the internet. 
                   I speak English, Hinglish, and Hindi!
                 </p>
                 <div className="grid grid-cols-2 gap-2 text-sm text-left">
-                  <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
-                    <p className="font-semibold text-blue-700 dark:text-blue-400">💬 Ask anything</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs">Get detailed answers</p>
+                  <div className="bg-blue-900/30 p-3 rounded-lg border border-blue-700">
+                    <p className="font-semibold text-blue-400">💬 Ask anything</p>
+                    <p className="text-gray-300 text-xs">Get detailed answers</p>
                   </div>
-                  <div className="bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg">
-                    <p className="font-semibold text-purple-700 dark:text-purple-400">💻 Code help</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs">Debug and learn</p>
+                  <div className="bg-purple-900/30 p-3 rounded-lg border border-purple-700">
+                    <p className="font-semibold text-purple-400">💻 Code help</p>
+                    <p className="text-gray-300 text-xs">Debug and learn</p>
                   </div>
-                  <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded-lg">
-                    <p className="font-semibold text-green-700 dark:text-green-400">📷 Image analysis</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs">Upload or capture</p>
+                  <div className="bg-green-900/30 p-3 rounded-lg border border-green-700">
+                    <p className="font-semibold text-green-400">📷 Image analysis</p>
+                    <p className="text-gray-300 text-xs">Upload or capture</p>
                   </div>
-                  <div className="bg-orange-50 dark:bg-orange-900/20 p-3 rounded-lg">
-                    <p className="font-semibold text-orange-700 dark:text-orange-400">🎤 Voice input</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs">Speak your question</p>
+                  <div className="bg-orange-900/30 p-3 rounded-lg border border-orange-700">
+                    <p className="font-semibold text-orange-400">🎤 Voice input</p>
+                    <p className="text-gray-300 text-xs">Speak your question</p>
                   </div>
                 </div>
               </div>
@@ -504,12 +504,12 @@ export default function StudentAIAssistant() {
                 </div>
               ))}
               {isLoading && (
-                <div className="flex gap-4 p-4">
+                <div className="flex gap-4 p-4 bg-gray-900 rounded-lg">
                   <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 animate-pulse" />
                   <div className="space-y-2 flex-1">
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24 animate-pulse" />
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full animate-pulse" />
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 animate-pulse" />
+                    <div className="h-4 bg-gray-700 rounded w-24 animate-pulse" />
+                    <div className="h-4 bg-gray-700 rounded w-full animate-pulse" />
+                    <div className="h-4 bg-gray-700 rounded w-3/4 animate-pulse" />
                   </div>
                 </div>
               )}
@@ -537,7 +537,7 @@ export default function StudentAIAssistant() {
 
         <canvas ref={canvasRef} className="hidden" />
 
-        <div className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 p-4">
+        <div className="bg-gray-900 border-t border-gray-700 p-4">
           {imagePreviews.length > 0 && (
             <div className="mb-4 flex gap-2 flex-wrap">
               {imagePreviews.map((preview, idx) => (
@@ -545,7 +545,7 @@ export default function StudentAIAssistant() {
                   <img
                     src={preview}
                     alt={`Preview ${idx + 1}`}
-                    className="w-20 h-20 object-cover rounded-lg border border-gray-200 dark:border-gray-700"
+                    className="w-20 h-20 object-cover rounded-lg border border-gray-600"
                   />
                   <Button
                     size="sm"
@@ -578,6 +578,7 @@ export default function StudentAIAssistant() {
               size="icon"
               onClick={() => fileInputRef.current?.click()}
               title="Upload image"
+              className="bg-gray-800 border-gray-600 text-white hover:bg-gray-700"
             >
               <Image className="w-5 h-5" />
             </Button>
@@ -587,6 +588,7 @@ export default function StudentAIAssistant() {
               size="icon"
               onClick={startCamera}
               title="Take photo"
+              className="bg-gray-800 border-gray-600 text-white hover:bg-gray-700"
             >
               <Camera className="w-5 h-5" />
             </Button>
@@ -606,7 +608,7 @@ export default function StudentAIAssistant() {
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               placeholder="Ask me anything... (Text, code, questions, analysis)"
-              className="flex-1 min-h-12 max-h-32"
+              className="flex-1 min-h-12 max-h-32 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400"
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
@@ -618,13 +620,13 @@ export default function StudentAIAssistant() {
             <Button
               onClick={handleSendMessage}
               disabled={isLoading || (!inputMessage.trim() && selectedImages.length === 0)}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
             >
               <Send className="w-5 h-5" />
             </Button>
           </div>
 
-          <p className="text-xs text-gray-500 mt-2 text-center">
+          <p className="text-xs text-gray-400 mt-2 text-center">
             Press Enter to send, Shift+Enter for new line
           </p>
         </div>
