@@ -1051,8 +1051,7 @@ const StudentDashboard = () => {
                 { title: "Track Bus", icon: MapPin, color: "from-emerald-500 to-teal-500", action: () => navigate('/student-track-bus') },
                 { title: "Fees", icon: CreditCard, color: "from-green-500 to-emerald-500", action: () => setActiveSection("fees") },
                 { title: "Principal Audio", icon: Volume2, color: "from-indigo-500 to-purple-500", action: () => navigate('/principal-audio') },
-                { title: "Principal Remarks", icon: Star, color: "from-yellow-500 to-orange-500", action: () => setShowPrincipalRemarksModal(true) },
-                { title: "AI Assistant", icon: GraduationCap, color: "from-blue-500 to-indigo-500", action: () => navigate('/student-ai-assistant') }
+                { title: "Principal Remarks", icon: Star, color: "from-yellow-500 to-orange-500", action: () => setShowPrincipalRemarksModal(true) }
               ].map((action, index) => (
                 <motion.button
                   key={action.title}
