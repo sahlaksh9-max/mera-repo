@@ -180,18 +180,18 @@ const CoursesManagement = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Header */}
       <header className="bg-card/95 backdrop-blur-md border-b border-border/50 sticky top-0 z-50">
-        <div className="container-wide py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+        <div className="w-full py-3 px-3 md:px-4">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2 min-w-0">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => navigate('/principal-dashboard')}
+                className="h-8 px-2"
               >
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Dashboard
+                <ArrowLeft className="h-4 w-4" />
               </Button>
-              <h1 className="text-xl font-heading font-bold text-foreground">
+              <h1 className="text-sm md:text-base font-heading font-bold text-foreground">
                 Courses Management
               </h1>
             </div>
@@ -201,9 +201,9 @@ const CoursesManagement = () => {
                 setEditingCourse(null);
                 setShowModal(true);
               }}
-              className="bg-gradient-to-r from-royal to-gold text-white"
+              className="bg-gradient-to-r from-royal to-gold text-white px-3 h-8 flex-shrink-0"
             >
-              <Plus className="h-4 w-4 mr-2" />
+              <Plus className="h-4 w-4 mr-1" />
               Add Course
             </Button>
           </div>
@@ -211,22 +211,23 @@ const CoursesManagement = () => {
       </header>
 
       {/* Courses List */}
-      <div className="container-wide py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="w-full py-6 px-3 md:px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
           {courses.map((course) => (
             <motion.div
               key={course.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-card rounded-xl p-6 border border-border/50"
+              className="bg-card rounded-lg p-4 border border-border/50"
             >
-              <div className="flex items-start justify-between mb-4">
-                <BookOpen className="h-6 w-6 text-gold" />
-                <div className="flex items-center space-x-2">
+              <div className="flex items-start justify-between mb-3">
+                <BookOpen className="h-5 w-5 text-gold flex-shrink-0" />
+                <div className="flex items-center gap-1">
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => handleEditCourse(course)}
+                    className="h-7 w-7 p-0"
                   >
                     <Edit className="h-4 w-4" />
                   </Button>
@@ -234,24 +235,24 @@ const CoursesManagement = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => handleDeleteCourse(course.id)}
-                    className="text-red-600 hover:text-red-700"
+                    className="text-red-600 hover:text-red-700 h-7 w-7 p-0"
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">{course.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{course.description}</p>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center justify-between">
+              <h3 className="text-base font-semibold text-foreground mb-1">{course.title}</h3>
+              <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{course.description}</p>
+              <div className="space-y-1.5 text-sm">
+                <div className="flex justify-between">
                   <span className="text-muted-foreground">Level:</span>
                   <span className="font-medium text-foreground">{course.level}</span>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex justify-between">
                   <span className="text-muted-foreground">Duration:</span>
                   <span className="font-medium text-foreground">{course.duration}</span>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex justify-between">
                   <span className="text-muted-foreground">Fee:</span>
                   <span className="font-medium text-gold">{course.fee}</span>
                 </div>
@@ -262,36 +263,39 @@ const CoursesManagement = () => {
 
         {courses.length === 0 && (
           <div className="text-center py-12">
-            <BookOpen className="h-16 w-16 mx-auto mb-4 text-muted-foreground opacity-50" />
-            <p className="text-muted-foreground">No courses available. Add your first course!</p>
+            <BookOpen className="h-16 w-16 mx-auto mb-3 text-muted-foreground opacity-50" />
+            <p className="text-sm text-muted-foreground">No courses available. Add your first course!</p>
           </div>
         )}
       </div>
 
       {/* Add/Edit Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50 p-0 sm:p-4">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-card rounded-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+            initial={{ opacity: 0, scale: 0.9, y: "100%" }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="bg-card rounded-t-lg sm:rounded-xl p-4 md:p-6 w-full sm:max-w-2xl max-h-[90vh] overflow-y-auto"
           >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-heading font-bold">
+            <div className="flex items-center justify-between mb-4 md:mb-6">
+              <h3 className="text-lg md:text-xl font-heading font-bold">
                 {editingCourse ? 'Edit Course' : 'Add New Course'}
               </h3>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowModal(false)}
+                className="h-8 w-8 p-0 flex-shrink-0"
               >
                 <X className="h-4 w-4" />
               </Button>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 md:space-y-4">
               <div>
-                <label className="text-sm font-medium mb-2 block">Course Title</label>
+                <label className="text-sm font-medium mb-1.5 block">Course Title</label>
                 <Input
                   value={courseForm.title}
                   onChange={(e) => setCourseForm({ ...courseForm, title: e.target.value })}
@@ -300,7 +304,7 @@ const CoursesManagement = () => {
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-2 block">Description</label>
+                <label className="text-sm font-medium mb-1.5 block">Description</label>
                 <Textarea
                   value={courseForm.description}
                   onChange={(e) => setCourseForm({ ...courseForm, description: e.target.value })}
@@ -309,9 +313,9 @@ const CoursesManagement = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Level</label>
+                  <label className="text-sm font-medium mb-1.5 block">Level</label>
                   <Input
                     value={courseForm.level}
                     onChange={(e) => setCourseForm({ ...courseForm, level: e.target.value })}
@@ -319,7 +323,7 @@ const CoursesManagement = () => {
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Duration</label>
+                  <label className="text-sm font-medium mb-1.5 block">Duration</label>
                   <Input
                     value={courseForm.duration}
                     onChange={(e) => setCourseForm({ ...courseForm, duration: e.target.value })}
@@ -328,9 +332,9 @@ const CoursesManagement = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Credits</label>
+                  <label className="text-sm font-medium mb-1.5 block">Credits</label>
                   <Input
                     value={courseForm.credits}
                     onChange={(e) => setCourseForm({ ...courseForm, credits: e.target.value })}
@@ -338,7 +342,7 @@ const CoursesManagement = () => {
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Fee</label>
+                  <label className="text-sm font-medium mb-1.5 block">Fee</label>
                   <Input
                     value={courseForm.fee}
                     onChange={(e) => setCourseForm({ ...courseForm, fee: e.target.value })}
@@ -348,7 +352,7 @@ const CoursesManagement = () => {
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-2 block">Instructor</label>
+                <label className="text-sm font-medium mb-1.5 block">Instructor</label>
                 <Input
                   value={courseForm.instructor}
                   onChange={(e) => setCourseForm({ ...courseForm, instructor: e.target.value })}
@@ -357,11 +361,18 @@ const CoursesManagement = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-end space-x-3 mt-6 pt-6 border-t">
-              <Button variant="outline" onClick={() => setShowModal(false)}>
+            <div className="flex flex-col gap-2 sm:flex-row sm:justify-end sm:gap-3 mt-4 md:mt-6 pt-4 md:pt-6 border-t">
+              <Button 
+                variant="outline" 
+                onClick={() => setShowModal(false)}
+                className="w-full sm:w-auto"
+              >
                 Cancel
               </Button>
-              <Button onClick={handleSaveCourse} className="bg-gradient-to-r from-royal to-gold text-white">
+              <Button 
+                onClick={handleSaveCourse} 
+                className="bg-gradient-to-r from-royal to-gold text-white w-full sm:w-auto"
+              >
                 <Save className="h-4 w-4 mr-2" />
                 {editingCourse ? 'Update' : 'Add'} Course
               </Button>

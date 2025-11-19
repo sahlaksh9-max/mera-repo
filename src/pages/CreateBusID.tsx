@@ -123,80 +123,80 @@ const CreateBusID: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-royal via-royal/90 to-gold/20 p-4">
-      <div className="container mx-auto max-w-4xl">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" onClick={() => navigate('/principal-dashboard')} className="rounded-full">
-              <ArrowLeft className="h-4 w-4" />
+    <div className="min-h-screen bg-gradient-to-br from-royal via-royal/90 to-gold/20 p-2 sm:p-3 md:p-4">
+      <div className="w-full max-w-7xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <Button variant="ghost" size="icon" onClick={() => navigate('/principal-dashboard')} className="rounded-full h-8 w-8 sm:h-9 sm:w-9 flex-shrink-0">
+              <ArrowLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </Button>
-            <div>
-              <h1 className="text-2xl font-bold text-white">Create Bus Tracking ID</h1>
-              <p className="text-white/80">Generate login for bus tracker</p>
+            <div className="min-w-0">
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white truncate">Create Bus Tracking ID</h1>
+              <p className="text-xs sm:text-sm text-white/80 truncate">Generate login for bus tracker</p>
             </div>
           </div>
-          <Badge variant="secondary" className="bg-white/10 text-white border-white/20">
-            <Bus className="h-4 w-4 mr-2" />
+          <Badge variant="secondary" className="bg-white/10 text-white border-white/20 text-xs sm:text-sm whitespace-nowrap">
+            <Bus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
             New Bus
           </Badge>
         </motion.div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}>
             <Card className="bg-card/95 backdrop-blur-md border-border/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <UserPlus className="h-5 w-5" />
+              <CardHeader className="p-3 sm:p-6">
+                <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                  <UserPlus className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                   Bus Account
                 </CardTitle>
-                <CardDescription>Fill details and generate credentials</CardDescription>
+                <CardDescription className="text-xs sm:text-sm">Fill details and generate credentials</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Username *</label>
-                  <Input name="username" value={form.username} onChange={handleChange} placeholder="tracker.username" disabled={isCreated} />
+              <CardContent className="space-y-3 sm:space-y-4 p-3 sm:p-6 pt-0 sm:pt-0">
+                <div className="space-y-1.5 sm:space-y-2">
+                  <label className="text-xs sm:text-sm font-medium">Username *</label>
+                  <Input name="username" value={form.username} onChange={handleChange} placeholder="tracker.username" disabled={isCreated} className="text-xs sm:text-sm h-8 sm:h-9" />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Password *</label>
+                <div className="space-y-1.5 sm:space-y-2">
+                  <label className="text-xs sm:text-sm font-medium">Password *</label>
                   <div className="relative">
-                    <Input name="password" type={showPassword ? 'text' : 'password'} value={form.password} onChange={handleChange} placeholder="Strong password" className="pr-10" disabled={isCreated} />
-                    <button type="button" onClick={() => setShowPassword((s) => !s)} className="absolute right-3 top-1/2 -translate-y-1/2">
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    <Input name="password" type={showPassword ? 'text' : 'password'} value={form.password} onChange={handleChange} placeholder="Strong password" className="pr-10 text-xs sm:text-sm h-8 sm:h-9" disabled={isCreated} />
+                    <button type="button" onClick={() => setShowPassword((s) => !s)} className="absolute right-2 top-1/2 -translate-y-1/2">
+                      {showPassword ? <EyeOff className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> : <Eye className="h-3.5 w-3.5 sm:h-4 sm:w-4" />}
                     </button>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Route Name</label>
-                    <Input name="routeName" value={form.routeName} onChange={handleChange} placeholder="Route A / Downtown" disabled={isCreated} />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+                  <div className="space-y-1.5 sm:space-y-2">
+                    <label className="text-xs sm:text-sm font-medium">Route Name</label>
+                    <Input name="routeName" value={form.routeName} onChange={handleChange} placeholder="Route A / Downtown" disabled={isCreated} className="text-xs sm:text-sm h-8 sm:h-9" />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Bus Number</label>
+                  <div className="space-y-1.5 sm:space-y-2">
+                    <label className="text-xs sm:text-sm font-medium">Bus Number</label>
                     <div className="relative">
-                      <Hash className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input name="busNumber" value={form.busNumber} onChange={handleChange} placeholder="e.g. RJ14-1234" className="pl-10" disabled={isCreated} />
+                      <Hash className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" />
+                      <Input name="busNumber" value={form.busNumber} onChange={handleChange} placeholder="e.g. RJ14-1234" className="pl-8 text-xs sm:text-sm h-8 sm:h-9" disabled={isCreated} />
                     </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Driver Name</label>
-                    <Input name="driverName" value={form.driverName} onChange={handleChange} placeholder="Name" disabled={isCreated} />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+                  <div className="space-y-1.5 sm:space-y-2">
+                    <label className="text-xs sm:text-sm font-medium">Driver Name</label>
+                    <Input name="driverName" value={form.driverName} onChange={handleChange} placeholder="Name" disabled={isCreated} className="text-xs sm:text-sm h-8 sm:h-9" />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Driver Phone</label>
+                  <div className="space-y-1.5 sm:space-y-2">
+                    <label className="text-xs sm:text-sm font-medium">Driver Phone</label>
                     <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input name="driverPhone" value={form.driverPhone} onChange={handleChange} placeholder="+91-..." className="pl-10" disabled={isCreated} />
+                      <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" />
+                      <Input name="driverPhone" value={form.driverPhone} onChange={handleChange} placeholder="+91-..." className="pl-8 text-xs sm:text-sm h-8 sm:h-9" disabled={isCreated} />
                     </div>
                   </div>
                 </div>
 
                 {!isCreated && (
-                  <div className="flex gap-2 pt-2">
-                    <Button onClick={generateBusId} className="flex-1"><RefreshCw className="h-4 w-4 mr-2" />Generate Bus ID</Button>
-                    <Button onClick={save} disabled={!form.username || !form.password || !generated || isLoading} className="flex-1">
-                      {isLoading ? <RefreshCw className="h-4 w-4 mr-2 animate-spin" /> : <Save className="h-4 w-4 mr-2" />}
+                  <div className="flex flex-col sm:flex-row gap-2 pt-1 sm:pt-2">
+                    <Button onClick={generateBusId} className="flex-1 text-xs sm:text-sm h-8 sm:h-9"><RefreshCw className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />Generate Bus ID</Button>
+                    <Button onClick={save} disabled={!form.username || !form.password || !generated || isLoading} className="flex-1 text-xs sm:text-sm h-8 sm:h-9">
+                      {isLoading ? <RefreshCw className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 animate-spin" /> : <Save className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />}
                       Create Account
                     </Button>
                   </div>
@@ -207,49 +207,49 @@ const CreateBusID: React.FC = () => {
 
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
             <Card className="bg-card/95 backdrop-blur-md border-border/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2"><Bus className="h-5 w-5" />Generated Credentials</CardTitle>
-                <CardDescription>Share with the assigned tracker</CardDescription>
+              <CardHeader className="p-3 sm:p-6">
+                <CardTitle className="flex items-center gap-2 text-base sm:text-lg"><Bus className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />Generated Credentials</CardTitle>
+                <CardDescription className="text-xs sm:text-sm">Share with the assigned tracker</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
                 {generated ? (
-                  <div className="space-y-4">
-                    <div className="p-4 bg-muted/20 rounded-lg">
+                  <div className="space-y-2 sm:space-y-4">
+                    <div className="p-2.5 sm:p-4 bg-muted/20 rounded-lg">
                       <div className="flex items-center justify-between mb-1">
-                        <label className="text-sm font-medium">Bus ID</label>
-                        <Button variant="ghost" size="sm" onClick={() => copy(generated.busId, 'Bus ID')}><Copy className="h-4 w-4" /></Button>
+                        <label className="text-xs sm:text-sm font-medium">Bus ID</label>
+                        <Button variant="ghost" size="sm" onClick={() => copy(generated.busId, 'Bus ID')} className="h-6 w-6 sm:h-8 sm:w-8 p-0"><Copy className="h-3 w-3 sm:h-4 sm:w-4" /></Button>
                       </div>
-                      <p className="font-mono text-lg font-bold text-primary">{generated.busId}</p>
+                      <p className="font-mono text-sm sm:text-lg font-bold text-primary break-all">{generated.busId}</p>
                     </div>
-                    <div className="p-4 bg-muted/20 rounded-lg">
+                    <div className="p-2.5 sm:p-4 bg-muted/20 rounded-lg">
                       <div className="flex items-center justify-between mb-1">
-                        <label className="text-sm font-medium">Username</label>
-                        <Button variant="ghost" size="sm" onClick={() => copy(form.username, 'Username')}><Copy className="h-4 w-4" /></Button>
+                        <label className="text-xs sm:text-sm font-medium">Username</label>
+                        <Button variant="ghost" size="sm" onClick={() => copy(form.username, 'Username')} className="h-6 w-6 sm:h-8 sm:w-8 p-0"><Copy className="h-3 w-3 sm:h-4 sm:w-4" /></Button>
                       </div>
-                      <p className="font-mono text-lg">{form.username || '—'}</p>
+                      <p className="font-mono text-sm sm:text-lg break-all">{form.username || '—'}</p>
                     </div>
-                    <div className="p-4 bg-muted/20 rounded-lg">
+                    <div className="p-2.5 sm:p-4 bg-muted/20 rounded-lg">
                       <div className="flex items-center justify-between mb-1">
-                        <label className="text-sm font-medium">Password</label>
-                        <Button variant="ghost" size="sm" onClick={() => copy(form.password, 'Password')}><Copy className="h-4 w-4" /></Button>
+                        <label className="text-xs sm:text-sm font-medium">Password</label>
+                        <Button variant="ghost" size="sm" onClick={() => copy(form.password, 'Password')} className="h-6 w-6 sm:h-8 sm:w-8 p-0"><Copy className="h-3 w-3 sm:h-4 sm:w-4" /></Button>
                       </div>
-                      <p className="font-mono text-lg">{form.password ? '••••••••' : '—'}</p>
+                      <p className="font-mono text-sm sm:text-lg">{form.password ? '••••••••' : '—'}</p>
                     </div>
-                    <div className="flex gap-2 pt-2">
+                    <div className="flex flex-col sm:flex-row gap-2 pt-1 sm:pt-2">
                       {!isCreated ? (
-                        <Button variant="outline" onClick={resetForm}>Reset</Button>
+                        <Button variant="outline" onClick={resetForm} className="w-full text-xs sm:text-sm h-8 sm:h-9">Reset</Button>
                       ) : (
                         <>
-                          <Button onClick={() => navigate('/manage-bus-id')} className="flex-1">Manage Bus IDs</Button>
-                          <Button variant="outline" onClick={resetForm}>Create Another</Button>
+                          <Button onClick={() => navigate('/manage-bus-id')} className="flex-1 text-xs sm:text-sm h-8 sm:h-9">Manage Bus IDs</Button>
+                          <Button variant="outline" onClick={resetForm} className="flex-1 text-xs sm:text-sm h-8 sm:h-9">Create Another</Button>
                         </>
                       )}
                     </div>
                   </div>
                 ) : (
-                  <div className="text-center py-12 text-muted-foreground">
-                    <UserPlus className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p>Fill in the details and generate credentials to see them here</p>
+                  <div className="text-center py-8 sm:py-12 text-muted-foreground">
+                    <UserPlus className="h-8 w-8 sm:h-12 sm:w-12 mx-auto mb-2 sm:mb-4 opacity-50" />
+                    <p className="text-xs sm:text-sm">Fill in the details and generate credentials to see them here</p>
                   </div>
                 )}
               </CardContent>

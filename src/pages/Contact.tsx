@@ -306,8 +306,8 @@ const Contact = () => {
             >
               {/* Subscription Form */}
               <div className="card-3d p-8">
-                <h3 className="text-2xl font-heading font-bold mb-6">Stay Updated</h3>
-                <p className="text-muted-foreground mb-4">
+                <h3 className="text-2xl font-heading font-bold mb-6 text-gold">Stay Updated</h3>
+                <p className="text-white dark:text-gold mb-4">
                   Subscribe to our newsletter and we'll notify you about our new updates.
                 </p>
                 <SubscriptionForm />

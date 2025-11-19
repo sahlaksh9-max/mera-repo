@@ -109,35 +109,48 @@ const StudentAuth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-royal-blue via-royal-purple to-royal-gold flex items-center justify-center p-2 sm:p-4">
+    <div className="min-h-screen bg-gradient-to-br from-royal-blue via-royal-purple to-royal-gold flex items-center justify-center p-2 sm:p-4 relative overflow-hidden">
+      {/* Neon Background Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-md"
+        className="w-full max-w-md relative z-10"
       >
         {/* Back Button */}
         <div className="mb-3 sm:mb-4">
           <Button
             variant="ghost"
             onClick={() => navigate(-1)}
-            className="flex items-center space-x-1 sm:space-x-2 text-black dark:text-white hover:text-royal-blue h-8 sm:h-auto px-2 sm:px-3"
+            className="flex items-center space-x-1 sm:space-x-2 text-white dark:text-white hover:text-gold hover:bg-gold/10 h-8 sm:h-auto px-2 sm:px-3 transition-all"
           >
             <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
             <span className="text-sm">Back</span>
           </Button>
         </div>
         
-        <div className="bg-card/95 backdrop-blur-sm rounded-2xl shadow-2xl p-4 sm:p-8 border border-border/50">
-          <div className="text-center mb-6 sm:mb-8">
-            <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-royal-blue to-royal-purple rounded-full flex items-center justify-center mb-3 sm:mb-4">
+        <div className="bg-card/95 backdrop-blur-sm rounded-2xl shadow-2xl p-4 sm:p-8 border border-cyan-500/30 relative overflow-hidden">
+          {/* Neon Border Glow */}
+          <div className="absolute inset-0 rounded-2xl pointer-events-none" style={{
+            background: 'linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent)',
+            animation: 'shimmer 3s infinite'
+          }}></div>
+
+          <div className="text-center mb-6 sm:mb-8 relative z-10">
+            <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mb-3 sm:mb-4 shadow-lg shadow-cyan-500/50">
               <GraduationCap className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1 sm:mb-2">Student Portal</h1>
-            <p className="text-sm text-muted-foreground">Access your academic dashboard</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2 drop-shadow-lg">Student Portal</h1>
+            <p className="text-sm text-cyan-300/80">Access your academic dashboard</p>
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-4 sm:space-y-6">
+          <form onSubmit={handleLogin} className="space-y-4 sm:space-y-6 relative z-10">
             {error && (
               <Alert variant="destructive">
                 <AlertCircle className="h-4 w-4" />
@@ -146,45 +159,52 @@ const StudentAuth = () => {
             )}
 
             <div className="space-y-1 sm:space-y-2">
-              <label className="text-sm font-medium text-black dark:text-foreground">Student Username</label>
+              <label className="text-sm font-medium text-white">Student Username</label>
               <Input
                 type="text"
                 value={studentUsername}
                 onChange={(e) => setStudentUsername(e.target.value)}
                 placeholder="Enter your full name"
                 required
-                className="h-9 sm:h-11 text-sm text-black dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-white dark:bg-background border-gray-300 dark:border-border"
+                className="h-9 sm:h-11 text-sm text-black dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-white dark:bg-background border-gray-300 dark:border-cyan-500/50 focus:border-cyan-400 focus:ring-cyan-500/20"
               />
             </div>
 
             <div className="space-y-1 sm:space-y-2">
-              <label className="text-sm font-medium text-black dark:text-foreground">Student ID</label>
+              <label className="text-sm font-medium text-white">Student ID</label>
               <Input
                 type="text"
                 value={studentId}
                 onChange={(e) => setStudentId(e.target.value)}
                 placeholder="Enter your student ID (e.g., STU123456)"
                 required
-                className="h-9 sm:h-11 text-sm text-black dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-white dark:bg-background border-gray-300 dark:border-border"
+                className="h-9 sm:h-11 text-sm text-black dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-white dark:bg-background border-gray-300 dark:border-cyan-500/50 focus:border-cyan-400 focus:ring-cyan-500/20"
               />
             </div>
 
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-10 sm:h-11 bg-gradient-to-r from-royal-blue to-royal-purple hover:from-royal-blue/90 hover:to-royal-purple/90 text-sm"
+              className="w-full h-10 sm:h-11 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-semibold text-sm shadow-lg shadow-cyan-500/50 hover:shadow-cyan-400/70 transition-all"
             >
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
 
-          <div className="mt-4 sm:mt-6 text-center">
-            <p className="text-xs sm:text-sm text-muted-foreground">
+          <div className="mt-4 sm:mt-6 text-center relative z-10">
+            <p className="text-xs sm:text-sm text-cyan-300/80">
               Need help? Contact your teacher or administrator
             </p>
           </div>
         </div>
       </motion.div>
+
+      <style>{`
+        @keyframes shimmer {
+          0%, 100% { opacity: 0; }
+          50% { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 };

@@ -185,24 +185,24 @@ const Footer = () => {
                   <span className="text-base font-heading font-bold text-gradient-gold truncate">
                     {brandingData.schoolName}
                   </span>
-                  <span className="text-[10px] text-black dark:text-muted-foreground tracking-wide truncate">
+                  <span className="text-[10px] text-white dark:text-gold tracking-wide truncate">
                     {brandingData.tagline}
                   </span>
                 </div>
               </Link>
               
-              <p className="text-xs text-black dark:text-muted-foreground leading-relaxed mb-3">
+              <p className="text-xs text-white dark:text-gold leading-relaxed mb-3">
                 Nurturing minds, shaping futures. For over 148 years, {brandingData.schoolName} has been 
                 committed to providing world-class education.
               </p>
 
               {/* Contact Info - Compact for 375px */}
               <div className="space-y-1.5">
-                <div className="flex items-center space-x-2 text-black dark:text-muted-foreground">
+                <div className="flex items-center space-x-2 text-white dark:text-gold">
                   <Phone className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="text-[11px] truncate">+1 (555) 123-4567</span>
                 </div>
-                <div className="flex items-center space-x-2 text-black dark:text-muted-foreground">
+                <div className="flex items-center space-x-2 text-white dark:text-gold">
                   <Mail className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="text-[11px] truncate">info@royalacademy.edu</span>
                 </div>
@@ -217,7 +217,7 @@ const Footer = () => {
                     <li key={link.name}>
                       <Link
                         to={link.path}
-                        className="text-sm text-black dark:text-muted-foreground hover:text-gold transition-colors"
+                        className="text-sm text-white dark:text-gold hover:text-gold transition-colors"
                       >
                         {link.name}
                       </Link>
@@ -232,7 +232,7 @@ const Footer = () => {
                     <li key={program.name}>
                       <Link
                         to={program.path}
-                        className="text-sm text-black dark:text-muted-foreground hover:text-gold transition-colors"
+                        className="text-sm text-white dark:text-gold hover:text-gold transition-colors"
                       >
                         {program.name}
                       </Link>
@@ -247,7 +247,7 @@ const Footer = () => {
                     <li key={resource.name}>
                       <Link
                         to={resource.path}
-                        className="text-sm text-black dark:text-muted-foreground hover:text-gold transition-colors"
+                        className="text-sm text-white dark:text-gold hover:text-gold transition-colors"
                       >
                         {resource.name}
                       </Link>
@@ -262,7 +262,7 @@ const Footer = () => {
                     <li key={program.name}>
                       <Link
                         to={program.path}
-                        className="text-sm text-black dark:text-muted-foreground hover:text-gold transition-colors"
+                        className="text-sm text-white dark:text-gold hover:text-gold transition-colors"
                       >
                         {program.name}
                       </Link>
@@ -278,7 +278,7 @@ const Footer = () => {
                     {achievements.slice(0, 2).map((achievement) => (
                       <div key={achievement.text} className="flex items-center space-x-2">
                         <achievement.icon className="h-4 w-4 text-gold flex-shrink-0" />
-                        <span className="text-xs text-black dark:text-muted-foreground">{achievement.text}</span>
+                        <span className="text-xs text-white dark:text-gold">{achievement.text}</span>
                       </div>
                     ))}
                   </div>
@@ -320,13 +320,13 @@ const Footer = () => {
                   <span className="text-xl font-heading font-bold text-gradient-gold leading-tight">
                     {brandingData.schoolName}
                   </span>
-                  <span className="text-xs text-black dark:text-muted-foreground tracking-wider mt-1">
+                  <span className="text-xs text-white dark:text-muted-foreground tracking-wider mt-1">
                     {brandingData.tagline}
                   </span>
                 </div>
               </Link>
               
-              <p className="text-black dark:text-muted-foreground leading-relaxed mb-6">
+              <p className="text-white dark:text-gold leading-relaxed mb-6">
                 Nurturing minds, shaping futures. For over 148 years, {brandingData.schoolName} has been 
                 committed to providing world-class education and developing tomorrow's leaders.
               </p>
@@ -336,7 +336,7 @@ const Footer = () => {
                 <motion.div 
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0 }}
-                  className="flex items-center space-x-3 text-black dark:text-muted-foreground hover:text-gold transition-colors"
+                  className="flex items-center space-x-3 text-white dark:text-gold hover:text-gold transition-colors"
                 >
                   <MapPin className="h-5 w-5 flex-shrink-0" />
                   <span className="text-sm">123 Excellence Boulevard, Academic City, AC 12345</span>
@@ -344,7 +344,7 @@ const Footer = () => {
                 <motion.div 
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0 }}
-                  className="flex items-center space-x-3 text-black dark:text-muted-foreground hover:text-gold transition-colors"
+                  className="flex items-center space-x-3 text-white dark:text-gold hover:text-gold transition-colors"
                 >
                   <Phone className="h-5 w-5 flex-shrink-0" />
                   <span className="text-sm">+1 (555) 123-4567</span>
@@ -352,7 +352,7 @@ const Footer = () => {
                 <motion.div 
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0 }}
-                  className="flex items-center space-x-3 text-black dark:text-muted-foreground hover:text-gold transition-colors"
+                  className="flex items-center space-x-3 text-white dark:text-gold hover:text-gold transition-colors"
                 >
                   <Mail className="h-5 w-5 flex-shrink-0" />
                   <span className="text-sm">info@royalacademy.edu</span>
@@ -379,7 +379,7 @@ const Footer = () => {
                   >
                     <Link
                       to={link.path}
-                      className="text-black dark:text-muted-foreground hover:text-gold transition-colors flex items-center space-x-2"
+                      className="text-white dark:text-gold hover:text-gold transition-colors flex items-center space-x-2"
                     >
                       <span className="text-sm">{link.name}</span>
                     </Link>
@@ -407,7 +407,7 @@ const Footer = () => {
                   >
                     <Link
                       to={program.path}
-                      className="text-black dark:text-muted-foreground hover:text-gold transition-colors flex items-center space-x-2"
+                      className="text-white dark:text-gold hover:text-gold transition-colors flex items-center space-x-2"
                     >
                       <span className="text-sm">{program.name}</span>
                     </Link>
@@ -435,7 +435,7 @@ const Footer = () => {
                   >
                     <Link
                       to={resource.path}
-                      className="text-black dark:text-muted-foreground hover:text-gold transition-colors flex items-center space-x-2"
+                      className="text-white dark:text-gold hover:text-gold transition-colors flex items-center space-x-2"
                     >
                       <span className="text-sm">{resource.name}</span>
                     </Link>
@@ -463,7 +463,7 @@ const Footer = () => {
                   >
                     <Link
                       to={program.path}
-                      className="text-black dark:text-muted-foreground hover:text-gold transition-colors flex items-center space-x-2"
+                      className="text-white dark:text-gold hover:text-gold transition-colors flex items-center space-x-2"
                     >
                       <span className="text-sm">{program.name}</span>
                     </Link>
@@ -490,7 +490,7 @@ const Footer = () => {
                     className="flex items-start space-x-3"
                   >
                     <achievement.icon className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-black dark:text-muted-foreground">{achievement.text}</span>
+                    <span className="text-sm text-white dark:text-gold">{achievement.text}</span>
                   </motion.div>
                 ))}
               </div>
@@ -512,17 +512,17 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-border/30 py-6 px-4 sm:px-6">
           <div className="container-wide flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-black dark:text-muted-foreground">
+            <p className="text-xs text-white dark:text-gold">
               &copy; {currentYear} {brandingData.schoolName}. All rights reserved.
             </p>
             <div className="flex items-center space-x-4">
-              <Link to="/privacy" className="text-xs text-black dark:text-muted-foreground hover:text-gold transition-colors">
+              <Link to="/privacy" className="text-xs text-white dark:text-gold hover:text-gold transition-colors">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="text-xs text-black dark:text-muted-foreground hover:text-gold transition-colors">
+              <Link to="/terms" className="text-xs text-white dark:text-gold hover:text-gold transition-colors">
                 Terms of Service
               </Link>
-              <Link to="/cookies" className="text-xs text-black dark:text-muted-foreground hover:text-gold transition-colors">
+              <Link to="/cookies" className="text-xs text-white dark:text-gold hover:text-gold transition-colors">
                 Cookie Policy
               </Link>
             </div>

@@ -293,14 +293,14 @@ const AudioMessageManager = ({ principalEmail }: { principalEmail: string }) => 
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-3 sm:space-y-0">
         <div>
-          <h2 className="text-lg sm:text-2xl font-bold flex items-center gap-2">
+          <h2 className="text-lg sm:text-2xl font-bold flex items-center gap-2 text-white">
             <Volume2 className="h-5 w-5 sm:h-6 sm:w-6 text-gold" />
             <span className="hidden sm:inline">Principal Audio Messages</span>
             <span className="sm:hidden">Audio Messages</span>
           </h2>
           <p className="text-xs sm:text-sm text-muted-foreground mt-1">Send audio messages to students and teachers</p>
         </div>
-        <Button onClick={() => setShowCreateModal(true)} className="bg-gradient-to-r from-gold to-yellow-500 text-black w-full sm:w-auto">
+        <Button onClick={() => setShowCreateModal(true)} className="bg-gradient-to-r from-gold to-yellow-500 text-white w-full sm:w-auto">
           <Mic className="h-4 w-4 mr-2" />
           <span className="sm:hidden">New Message</span>
           <span className="hidden sm:inline">New Audio Message</span>

@@ -86,7 +86,7 @@ const SubscriptionForm = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="email" className="text-foreground">
+        <Label htmlFor="email" className="text-white">
           Email Address
         </Label>
         <Input
@@ -107,9 +107,9 @@ const SubscriptionForm = () => {
       <Button 
         type="submit" 
         disabled={state.isSubmitting}
-        className="w-full bg-gradient-to-r from-gold to-yellow-500 text-black font-bold hover:opacity-90"
+        className="w-full bg-gradient-to-r from-gold to-yellow-500 text-white font-bold hover:opacity-90"
       >
-        {state.isSubmitting ? 'Subscribing...' : 'Subscribe for Updates'}
+        {state.isSubmitting ? 'Subscribing...' : 'Subscribe'}
       </Button>
     </form>
   );

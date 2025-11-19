@@ -175,10 +175,10 @@ const Home = () => {
       <section className="section-padding bg-gradient-to-b from-background via-muted/5 to-accent/5">
         <div className="container-wide">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6 text-black dark:text-foreground">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6 text-white dark:text-foreground">
               Recent <span className="text-gradient-gold">Highlights</span>
             </h2>
-            <p className="text-xl text-black dark:text-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-white dark:text-foreground max-w-3xl mx-auto leading-relaxed">
               Celebrating our recent achievements and events
             </p>
           </div>
@@ -186,7 +186,7 @@ const Home = () => {
           {recentHighlights.length === 0 ? (
             <div className="text-center py-12 text-muted-foreground">
               <Calendar className="h-16 w-16 mx-auto mb-4 opacity-50" />
-              <p>No recent highlights available</p>
+              <p className="text-white">No recent highlights available</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -225,11 +225,11 @@ const Home = () => {
                   )}
 
                   <div className="p-6 space-y-4">
-                    <h3 className="text-xl font-heading font-bold text-black dark:text-foreground group-hover:text-gold transition-colors">
+                    <h3 className="text-xl font-heading font-bold text-white dark:text-foreground group-hover:text-gold transition-colors">
                       {highlight.title}
                     </h3>
 
-                    <p className="text-sm text-black dark:text-muted-foreground leading-relaxed line-clamp-3">
+                    <p className="text-sm text-white dark:text-muted-foreground leading-relaxed line-clamp-3">
                       {highlight.description}
                     </p>
 
@@ -239,7 +239,7 @@ const Home = () => {
                         <div className="space-y-1">
                           {highlight.fullContent.split('\n').slice(0, 3).map((line, i) => (
                             line.trim() && (
-                              <div key={i} className="flex items-start space-x-2 text-xs text-black dark:text-muted-foreground">
+                              <div key={i} className="flex items-start space-x-2 text-xs text-white dark:text-muted-foreground">
                                 <CheckCircle className="h-3 w-3 text-gold mt-0.5 flex-shrink-0" />
                                 <span className="line-clamp-1">{line.trim()}</span>
                               </div>
@@ -289,8 +289,8 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center bg-gradient-to-r from-royal/10 via-crimson/5 to-royal/10 p-16 rounded-2xl border border-border"
           >
-            <h3 className="text-4xl font-heading font-bold mb-6 text-black dark:text-foreground">Stay Updated</h3>
-            <p className="text-xl text-black dark:text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <h3 className="text-4xl font-heading font-bold mb-6 text-gold dark:text-gold">Stay Updated</h3>
+            <p className="text-xl text-white dark:text-gold mb-8 max-w-3xl mx-auto">
               Subscribe to our newsletter to receive updates about upcoming events, academic achievements, and school news.
             </p>
             <NewsletterForm />

@@ -207,6 +207,7 @@ const TeacherDashboard = () => {
   const [activeSection, setActiveSection] = useState<"dashboard" | "homework" | "attendance" | "students" | "createstudent" | "remarks" | "studentreport" | "profile" | "fees">("dashboard");
   const [selectedClass, setSelectedClass] = useState("8");
   const [selectedSection, setSelectedSection] = useState("A");
+  const [feeFilterRoll, setFeeFilterRoll] = useState<string>("");
   const [students, setStudents] = useState<Student[]>([]);
   const [homework, setHomework] = useState<Homework[]>([]);
   const [attendanceRecords, setAttendanceRecords] = useState<AttendanceRecord[]>([]);
@@ -294,6 +295,20 @@ const TeacherDashboard = () => {
     months: [] as string[],
     notes: ''
   });
+  // Payment modal filter state
+  const [paymentFilterClass, setPaymentFilterClass] = useState<string>(classes[0] || "");
+  const [paymentFilterSection, setPaymentFilterSection] = useState<string>(sections[0] || "");
+  const [paymentFilterRoll, setPaymentFilterRoll] = useState<string>("");
+
+  // When payment modal opens, pre-fill filters from current selection
+  useEffect(() => {
+    if (showPaymentModal) {
+      setPaymentFilterClass(selectedClass || classes[0] || "");
+      setPaymentFilterSection(selectedSection || sections[0] || "");
+      setPaymentFilterRoll("");
+      setSelectedStudentForPayment(null);
+    }
+  }, [showPaymentModal]);
   const [showFeeStatusModal, setShowFeeStatusModal] = useState(false);
 
   // Notification state
@@ -1038,6 +1053,25 @@ Student ID: ${studentId}`);
 
   const getClassStudents = () => {
     return students.filter(s => s.class === selectedClass && s.section === selectedSection);
+  };
+
+  const getFeeFilteredStudents = () => {
+    return students.filter(s => {
+      const byClass = s.class === selectedClass;
+      const bySection = s.section === selectedSection;
+      const byRoll = feeFilterRoll ? s.rollNumber.toString() === feeFilterRoll : true;
+      return byClass && bySection && byRoll;
+    });
+  };
+
+  // Students filtered in payment modal by local class/section/roll
+  const getPaymentFilteredStudents = () => {
+    return students.filter(s => {
+      const byClass = paymentFilterClass ? s.class === paymentFilterClass : true;
+      const bySection = paymentFilterSection ? s.section === paymentFilterSection : true;
+      const byRoll = paymentFilterRoll ? s.rollNumber.toString() === paymentFilterRoll : true;
+      return byClass && bySection && byRoll;
+    });
   };
 
   // Handle report image upload
@@ -3021,6 +3055,24 @@ Student ID: ${studentId}`);
               </div>
 
               <div>
+                <label className="block text-sm font-medium mb-2">Search by Roll Number (Optional)</label>
+                <input
+                  type="text"
+                  placeholder="Enter roll number to filter student..."
+                  className="w-full p-3 border border-border rounded-lg bg-background text-foreground"
+                  onChange={(e) => {
+                    const rollNum = e.target.value.trim();
+                    if (rollNum) {
+                      const filteredStudent = getClassStudents().find(s => s.rollNumber.toString() === rollNum);
+                      if (filteredStudent) {
+                        setRemarksForm({...remarksForm, studentId: filteredStudent.id});
+                      }
+                    }
+                  }}
+                />
+              </div>
+
+              <div>
                 <label className="block text-sm font-medium mb-2">Select Student</label>
                 <select
                   value={remarksForm.studentId}
@@ -3617,11 +3669,31 @@ Student ID: ${studentId}`);
                   ))}
                 </select>
               </div>
+              <div className="w-full sm:w-auto">
+                <label className="block text-xs sm:text-sm font-medium mb-1 sm:mb-2">Roll (Optional)</label>
+                <input
+                  type="text"
+                  value={feeFilterRoll}
+                  onChange={(e) => setFeeFilterRoll(e.target.value.trim())}
+                  placeholder="Enter roll number"
+                  className="w-full px-2 py-1.5 sm:px-3 sm:py-2 border border-border rounded-lg bg-background text-foreground text-sm"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end mb-6">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setFeeFilterRoll("")}
+              >
+                Clear Roll Filter
+              </Button>
             </div>
 
             {/* Students List */}
             <div className="space-y-4">
-              {getClassStudents().map((student) => {
+              {getFeeFilteredStudents().map((student) => {
                 const feeStatus = getStudentFeeStatus(student.id);
                 return (
                   <div key={student.id} className="border border-border/30 rounded-lg p-4">
@@ -3737,10 +3809,10 @@ Student ID: ${studentId}`);
                 );
               })}
 
-              {getClassStudents().length === 0 && (
+              {getFeeFilteredStudents().length === 0 && (
                 <div className="text-center py-8">
                   <Users className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground">No students found in Class {selectedClass}-{selectedSection}</p>
+                  <p className="text-muted-foreground">{ feeFilterRoll ? `No students found with Roll ${feeFilterRoll} in Class ${selectedClass}-${selectedSection}` : `No students found in Class ${selectedClass}-${selectedSection}` }</p>
                 </div>
               )}
             </div>
@@ -4247,26 +4319,95 @@ Student ID: ${studentId}`);
             </div>
 
             <div className="space-y-4">
-              {/* Student Selection */}
+              {/* Student Selection & Filters */}
               {!selectedStudentForPayment && (
-                <div>
-                  <label className="block text-sm font-medium mb-2">Select Student</label>
-                  <select
-                    onChange={(e) => {
-                      const student = students.find(s => s.id === e.target.value);
-                      setSelectedStudentForPayment(student || null);
-                    }}
-                    className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
-                  >
-                    <option value="">Choose a student...</option>
-                    {students.map(student => (
-                      <option key={student.id} value={student.id}>
-                        {student.name} - Class {student.class}-{student.section}
-                      </option>
-                    ))}
-                  </select>
+                <div className="space-y-3">
+                  <div className="grid grid-cols-3 gap-3">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Class</label>
+                      <select
+                        value={paymentFilterClass}
+                        onChange={(e) => {
+                          setPaymentFilterClass(e.target.value);
+                          setSelectedStudentForPayment(null);
+                        }}
+                        className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
+                      >
+                        {classes.map(cls => (
+                          <option key={cls} value={cls}>Class {cls}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Section</label>
+                      <select
+                        value={paymentFilterSection}
+                        onChange={(e) => {
+                          setPaymentFilterSection(e.target.value);
+                          setSelectedStudentForPayment(null);
+                        }}
+                        className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
+                      >
+                        {sections.map(sec => (
+                          <option key={sec} value={sec}>Section {sec}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Roll (Optional)</label>
+                      <input
+                        type="text"
+                        value={paymentFilterRoll}
+                        onChange={(e) => {
+                          const r = e.target.value.trim();
+                          setPaymentFilterRoll(r);
+                          setSelectedStudentForPayment(null);
+                          if (r) {
+                            const found = getPaymentFilteredStudents().find(s => s.rollNumber.toString() === r);
+                            if (found) setSelectedStudentForPayment(found);
+                          }
+                        }}
+                        placeholder="Enter roll number"
+                        className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex justify-end mt-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        setPaymentFilterClass(classes[0] || "");
+                        setPaymentFilterSection(sections[0] || "");
+                        setPaymentFilterRoll("");
+                        setSelectedStudentForPayment(null);
+                      }}
+                    >
+                      Clear Filters
+                    </Button>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Select Student</label>
+                    <select
+                      onChange={(e) => {
+                        const student = students.find(s => s.id === e.target.value);
+                        setSelectedStudentForPayment(student || null);
+                      }}
+                      className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
+                    >
+                      <option value="">Choose a student...</option>
+                      {getPaymentFilteredStudents().map(student => (
+                        <option key={student.id} value={student.id}>
+                          {student.name} - Class {student.class}-{student.section} (Roll: {student.rollNumber})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
               )}
+
 
               {selectedStudentForPayment && (
                 <>

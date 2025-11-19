@@ -186,33 +186,32 @@ const CoursesManagement = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Header */}
       <header className="bg-card/95 backdrop-blur-md border-b border-border/50 sticky top-0 z-50">
-        <div className="container-wide py-3 sm:py-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
-            <div className="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto">
+        <div className="w-full py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 md:gap-4">
+            {/* Left Section: Back Button + Title */}
+            <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 min-w-0 flex-wrap">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => navigate('/principal-dashboard')}
-                className="text-xs sm:text-sm px-2 sm:px-4"
+                className="text-xs sm:text-xs px-1.5 sm:px-2 h-7 sm:h-8 flex-shrink-0 whitespace-nowrap"
               >
-                <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                <span className="hidden sm:inline">Back to Dashboard</span>
-                <span className="sm:hidden">Back</span>
+                <ArrowLeft className="h-4 w-4 sm:h-4 sm:w-4" />
               </Button>
-              <h1 className="text-base sm:text-xl font-heading font-bold text-foreground">
-                Courses Management
+              <h1 className="text-xs sm:text-sm md:text-base font-heading font-bold text-foreground break-words">
+                Courses<br className="sm:hidden" /> Management
               </h1>
             </div>
+            {/* Right Section: Add Button */}
             <Button
               onClick={() => {
                 resetForm();
                 setEditingCourse(null);
                 setShowModal(true);
               }}
-              className="bg-gradient-to-r from-royal to-gold text-white w-full sm:w-auto text-xs sm:text-sm px-3 sm:px-4 h-8 sm:h-9"
+              className="bg-gradient-to-r from-royal to-gold text-white w-auto text-xs px-2 sm:px-2.5 h-7 sm:h-8 flex-shrink-0 whitespace-nowrap"
             >
-              <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-              Add Course
+              <Plus className="h-4 w-4 sm:h-4 sm:w-4" />
             </Button>
           </div>
         </div>

@@ -173,6 +173,17 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Custom Styles */}
+      <style>{`
+        @keyframes pulse-soft {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.8; }
+        }
+        .animate-pulse-soft {
+          animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+      `}</style>
+
       {/* Background with banner image rotation */}
       <div className="absolute inset-0 z-0">
         <div 
@@ -224,22 +235,51 @@ const Hero = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 pt-6 sm:pt-16 px-2 sm:px-0">
-            {stats.map((stat) => (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 pt-6 sm:pt-16 px-2 sm:px-0 relative">
+            {/* Glowing Background */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute left-1/4 top-1/2 w-32 h-32 bg-gold/10 rounded-full blur-2xl -translate-y-1/2"></div>
+              <div className="absolute right-1/4 top-1/2 w-32 h-32 bg-crimson/10 rounded-full blur-2xl -translate-y-1/2"></div>
+            </div>
+
+            {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className="card-3d p-4 text-center group"
+                className="card-3d p-4 text-center group relative overflow-hidden rounded-xl hover:scale-105 transition-transform duration-300"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="flex flex-col items-center space-y-3">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-gold/20 to-gold/40 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <stat.icon className="h-5 w-5 sm:h-6 sm:w-6 text-gold" />
+                {/* Animated Background Gradient - Always Visible */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-transparent opacity-100 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Border Glow Effect - Always Visible */}
+                <div className="absolute inset-0 rounded-xl border border-gold/40 group-hover:border-gold/60 transition-colors duration-300"></div>
+                
+                {/* Neon Glow on Hover - Always Visible */}
+                <div className="absolute inset-0 rounded-xl opacity-100 group-hover:opacity-100 transition-opacity duration-300" style={{
+                  boxShadow: 'inset 0 0 20px rgba(255, 193, 7, 0.15), 0 0 20px rgba(255, 193, 7, 0.1)',
+                  background: 'radial-gradient(circle at center, rgba(255, 193, 7, 0.05) 0%, transparent 70%)'
+                }}></div>
+
+                <div className="flex flex-col items-center space-y-3 relative z-10">
+                  {/* Icon Container with Enhanced Effects - Always Visible */}
+                  <div className="relative">
+                    <div className="absolute inset-0 w-10 h-10 sm:w-12 sm:h-12 bg-gold/40 rounded-full blur-xl opacity-100 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-gold/40 to-gold/60 flex items-center justify-center group-hover:scale-125 hover:scale-120 group-hover:shadow-lg group-hover:shadow-gold/60 shadow-md shadow-gold/40 transition-all duration-300">
+                      <stat.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white group-hover:text-white transition-colors duration-300" />
+                    </div>
                   </div>
+
                   <div className="space-y-1">
-                    <div className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-gradient-gold">
+                    {/* Animated Number Counter Effect - Always Visible */}
+                    <div className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-gold via-amber-300 to-gold group-hover:from-amber-200 group-hover:via-gold group-hover:to-amber-200 transition-all duration-300 animate-pulse-soft">
                       {stat.value}
                     </div>
-                    <p className="text-muted-foreground text-sm sm:text-base">{stat.label}</p>
+                    <p className="text-muted-foreground text-sm sm:text-base group-hover:text-gold transition-colors duration-300 font-medium">{stat.label}</p>
                   </div>
+
+                  {/* Floating Particles - Always Visible */}
+                  <div className="absolute top-2 left-2 w-1 h-1 bg-gold/100 rounded-full opacity-100 group-hover:opacity-100 animate-float transition-opacity" style={{ animationDuration: '2s' }}></div>
+                  <div className="absolute bottom-2 right-2 w-1.5 h-1.5 bg-gold/80 rounded-full opacity-100 group-hover:opacity-100 animate-float transition-opacity" style={{ animationDuration: '3s', animationDelay: '0.5s' }}></div>
                 </div>
               </div>
             ))}

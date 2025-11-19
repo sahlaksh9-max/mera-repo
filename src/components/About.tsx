@@ -146,7 +146,15 @@ const About = () => {
   ];
 
   return (
-    <section className="py-8 sm:py-16 px-4 sm:px-6 bg-gradient-to-b from-background to-muted/20">
+    <section className="py-8 sm:py-16 px-4 sm:px-6 bg-gradient-to-b from-background to-muted/20 relative">
+      {/* Custom Styles for Neon Effects */}
+      <style>{`
+        @keyframes shimmer-move {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+      `}</style>
+
       <div className="container-wide">
         <div className="text-center mb-8 sm:mb-16 animate-fade-in">
           <h2 
@@ -207,19 +215,55 @@ const About = () => {
           </div>
 
           {/* Values Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 px-2 sm:px-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 px-2 sm:px-0 relative">
+            {/* Background Glow Effects */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-gold/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+              <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-crimson/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+            </div>
+
             {values.map((value, index) => (
               <div
                 key={value.title}
-                className="card-3d p-4 sm:p-6 group"
+                className="card-3d p-4 sm:p-6 group relative overflow-hidden rounded-xl hover:scale-105 transition-all duration-300"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-gold/20 to-gold/40 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <value.icon className="h-6 w-6 text-gold" />
+                {/* Neon Background Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-transparent opacity-100 group-hover:opacity-100"></div>
+                
+                {/* Neon Border with Glow */}
+                <div className="absolute inset-0 rounded-xl border border-gold/40 group-hover:border-gold/70 transition-colors duration-300" style={{
+                  boxShadow: 'inset 0 0 15px rgba(255, 193, 7, 0.1), 0 0 15px rgba(255, 193, 7, 0.08)'
+                }}></div>
+
+                {/* Shimmer Effect */}
+                <div className="absolute inset-0 rounded-xl opacity-50 group-hover:opacity-100 transition-opacity duration-300" style={{
+                  background: 'linear-gradient(45deg, transparent 30%, rgba(255, 193, 7, 0.05) 50%, transparent 70%)',
+                  backgroundSize: '200% 200%',
+                  animation: 'shimmer-move 3s infinite'
+                }}></div>
+
+                <div className="space-y-4 relative z-10">
+                  {/* Icon Container with Neon Glow */}
+                  <div className="relative">
+                    <div className="absolute inset-0 w-12 h-12 bg-gold/50 rounded-lg blur-lg opacity-100 group-hover:opacity-100 animate-pulse"></div>
+                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-gold/30 to-gold/60 flex items-center justify-center group-hover:scale-125 group-hover:shadow-lg group-hover:shadow-gold/60 shadow-md shadow-gold/40 transition-all duration-300">
+                      <value.icon className="h-6 w-6 text-white" />
+                    </div>
                   </div>
-                  <h4 className="text-lg sm:text-xl font-heading font-semibold">{value.title}</h4>
-                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{value.description}</p>
+
+                  {/* Title with Gradient */}
+                  <h4 className="text-lg sm:text-xl font-heading font-semibold text-white group-hover:text-gold transition-colors duration-300">
+                    {value.title}
+                  </h4>
+
+                  {/* Description */}
+                  <p className="text-sm sm:text-base text-gray-200 group-hover:text-white leading-relaxed transition-colors duration-300">
+                    {value.description}
+                  </p>
+
+                  {/* Accent Line */}
+                  <div className="pt-2 h-0.5 bg-gradient-to-r from-gold/0 via-gold/50 to-gold/0 opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
               </div>
             ))}

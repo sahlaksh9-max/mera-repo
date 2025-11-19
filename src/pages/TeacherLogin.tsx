@@ -75,40 +75,53 @@ const TeacherLogin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-royal via-royal/90 to-gold/20 flex items-center justify-center p-2 sm:p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-2 sm:p-4 relative overflow-hidden">
+      {/* Neon Background Effects - Gold and Sky Blue */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-400/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-cyan-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-amber-300/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-md"
+        className="w-full max-w-md relative z-10"
       >
         {/* Back Button */}
         <div className="mb-3 sm:mb-4">
           <Button
             variant="ghost"
             onClick={() => navigate("/auth")}
-            className="glass-button flex items-center space-x-1 sm:space-x-2 text-black dark:text-white hover:text-gold h-8 sm:h-auto px-2 sm:px-3"
+            className="glass-button flex items-center space-x-1 sm:space-x-2 text-white dark:text-white hover:text-gold hover:bg-gold/10 h-8 sm:h-auto px-2 sm:px-3 transition-all"
           >
             <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
             <span className="text-sm">Back</span>
           </Button>
         </div>
 
-        <div className="glass-card rounded-2xl shadow-2xl p-4 sm:p-8">
+        <div className="glass-card rounded-2xl shadow-2xl p-4 sm:p-8 border border-gold/30 relative overflow-hidden">
+          {/* Neon Border Glow */}
+          <div className="absolute inset-0 rounded-2xl pointer-events-none" style={{
+            background: 'linear-gradient(45deg, transparent, rgba(255, 193, 7, 0.1), rgba(34, 211, 238, 0.1), transparent)',
+            animation: 'shimmer 3s infinite'
+          }}></div>
+
           {/* Header */}
-          <div className="text-center mb-6 sm:mb-8">
+          <div className="text-center mb-6 sm:mb-8 relative z-10">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-r from-gold to-yellow-500 flex items-center justify-center mx-auto mb-3 sm:mb-4"
+              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-r from-yellow-400 to-amber-400 flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg shadow-yellow-400/50"
             >
               <Users className="h-8 w-8 sm:h-10 sm:w-10 text-black" />
             </motion.div>
-            <h1 className="text-xl sm:text-2xl font-heading font-bold text-foreground mb-1 sm:mb-2">
+            <h1 className="text-xl sm:text-2xl font-heading font-bold text-white mb-1 sm:mb-2">
               Teacher Portal
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-cyan-300/80">
               Access your teaching dashboard
             </p>
           </div>
@@ -124,9 +137,9 @@ const TeacherLogin = () => {
           )}
 
           {/* Login Form */}
-          <form onSubmit={handleLogin} className="space-y-4 sm:space-y-6">
+          <form onSubmit={handleLogin} className="space-y-4 sm:space-y-6 relative z-10">
             <div className="space-y-1 sm:space-y-2">
-              <label className="text-sm font-medium text-black dark:text-foreground">
+              <label className="text-sm font-medium text-white">
                 Teacher Username
               </label>
               <Input
@@ -135,12 +148,12 @@ const TeacherLogin = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter your username"
                 required
-                className="h-9 sm:h-11 text-sm text-black dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-white dark:bg-background border-gray-300 dark:border-border"
+                className="h-9 sm:h-11 text-sm text-black dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-white dark:bg-background border-gray-300 dark:border-gold/50 focus:border-gold focus:ring-gold/20"
               />
             </div>
 
             <div className="space-y-1 sm:space-y-2">
-              <label className="text-sm font-medium text-black dark:text-foreground">
+              <label className="text-sm font-medium text-white">
                 Teacher ID
               </label>
               <Input
@@ -149,14 +162,14 @@ const TeacherLogin = () => {
                 onChange={(e) => setTeacherId(e.target.value)}
                 placeholder="Enter your teacher ID"
                 required
-                className="h-9 sm:h-11 text-sm text-black dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-white dark:bg-background border-gray-300 dark:border-border"
+                className="h-9 sm:h-11 text-sm text-black dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 bg-white dark:bg-background border-gray-300 dark:border-gold/50 focus:border-gold focus:ring-gold/20"
               />
             </div>
 
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-gold to-yellow-500 hover:from-gold/80 hover:to-yellow-500/80 text-black font-semibold h-10 sm:h-12 text-sm"
+              className="w-full bg-gradient-to-r from-gold to-yellow-400 hover:from-yellow-400 hover:to-amber-400 text-black font-semibold h-10 sm:h-12 text-sm shadow-lg shadow-gold/50 hover:shadow-yellow-400/70 transition-all"
             >
               {isLoading ? (
                 <div className="flex items-center space-x-2">
@@ -170,21 +183,28 @@ const TeacherLogin = () => {
           </form>
 
           {/* Footer */}
-          <div className="mt-6 sm:mt-8 text-center">
-            <p className="text-xs sm:text-sm text-muted-foreground">
+          <div className="mt-6 sm:mt-8 text-center relative z-10">
+            <p className="text-xs sm:text-sm text-cyan-300/80">
               Need help? Contact{" "}
-              <a href="mailto:admin@royalacademy.edu" className="text-gold hover:text-gold/80 transition-colors">
+              <a href="mailto:admin@royalacademy.edu" className="text-gold hover:text-yellow-300 transition-colors">
                 admin@royalacademy.edu
               </a>
             </p>
-            <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/50">
-              <p className="text-xs text-muted-foreground">
+            <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gold/30">
+              <p className="text-xs text-cyan-300/80">
                 Royal Academy Teacher Portal • Secure Access
               </p>
             </div>
           </div>
         </div>
       </motion.div>
+
+      <style>{`
+        @keyframes shimmer {
+          0%, 100% { opacity: 0; }
+          50% { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 };

@@ -1027,8 +1027,18 @@ const StudentDashboard = () => {
           transition={{ delay: 0.6 }}
           className="mt-4 sm:mt-8"
         >
-          <div className="bg-card/95 backdrop-blur-md rounded-xl p-4 sm:p-6 border border-pink-500/40 shadow-[0_0_25px_rgba(236,72,153,0.25)]">
-            <h2 className="text-base sm:text-lg font-heading font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-4 sm:mb-6">
+          <style>{`
+            @keyframes neon-glow {
+              0%, 100% { box-shadow: 0 0 10px rgba(255, 193, 7, 0.5), 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(255, 193, 7, 0.1); }
+              50% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.8), 0 0 30px rgba(0, 212, 255, 0.5), inset 0 0 20px rgba(255, 193, 7, 0.2); }
+            }
+            @keyframes float-neon {
+              0%, 100% { transform: translateY(0px); }
+              50% { transform: translateY(-4px); }
+            }
+          `}</style>
+          <div className="bg-card/95 backdrop-blur-md rounded-xl p-4 sm:p-6 border-2 border-gold/30 shadow-[0_0_30px_rgba(255,193,7,0.25),0_0_20px_rgba(0,212,255,0.15)]">
+            <h2 className="text-base sm:text-lg font-heading font-bold bg-gradient-to-r from-gold via-yellow-400 to-cyan-400 bg-clip-text text-transparent mb-4 sm:mb-6">
               Quick Actions
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
@@ -1060,20 +1070,29 @@ const StudentDashboard = () => {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.7 + index * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={action.action}
-                  className="relative rounded-xl overflow-hidden bg-gradient-to-br from-white/10 via-white/5 to-white/0 border border-white/10 shadow-lg hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300 text-white group"
+                  className="relative rounded-xl overflow-hidden group"
+                  style={{ animation: 'float-neon 3s ease-in-out infinite' }}
                 >
-                  <div className={`bg-gradient-to-r ${action.color} p-3 sm:p-4 rounded-xl transform transition-transform duration-300 group-hover:scale-[1.02]`}>
-                    <action.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white mb-2 sm:mb-3 mx-auto" />
-                    <p className="text-xs sm:text-sm font-medium text-white text-center">
+                  {/* Neon Border Glow Background */}
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{
+                    boxShadow: 'inset 0 0 20px rgba(255, 193, 7, 0.4), 0 0 20px rgba(0, 212, 255, 0.3)',
+                  }}></div>
+                  
+                  <div className={`relative bg-gradient-to-r ${action.color} p-3 sm:p-4 rounded-xl transform transition-all duration-300 group-hover:scale-[1.08] border border-white/20 group-hover:border-gold/60`}
+                    style={{
+                      boxShadow: '0 0 15px rgba(255, 193, 7, 0.3), 0 0 10px rgba(0, 212, 255, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.1)',
+                    }}>
+                    <action.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white mb-2 sm:mb-3 mx-auto drop-shadow-lg" />
+                    <p className="text-xs sm:text-sm font-medium text-white text-center drop-shadow-md">
                       {action.title}
                     </p>
                   </div>
                   {/* Notification Badge */}
                   {action.badge && action.badge > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-yellow-500 text-black text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                    <span className="absolute -top-2 -right-2 bg-gold text-black text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse shadow-lg shadow-gold/50">
                       {action.badge}
                     </span>
                   )}

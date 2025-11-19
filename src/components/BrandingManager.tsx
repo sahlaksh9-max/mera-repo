@@ -152,7 +152,7 @@ const BrandingManager = () => {
                 <Button 
                   type="button" 
                   onClick={triggerFileInput}
-                  className="bg-gradient-to-r from-gold to-yellow-500 text-black font-bold hover:from-gold/90 hover:to-yellow-500/90 w-full sm:w-auto"
+                  className="bg-gradient-to-r from-gold to-yellow-500 text-white font-bold hover:from-gold/90 hover:to-yellow-500/90 w-full sm:w-auto"
                 >
                   Choose Logo from Device
                 </Button>
@@ -181,7 +181,7 @@ const BrandingManager = () => {
               <Button 
                 type="submit" 
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-gold to-yellow-500 text-black font-bold hover:from-gold/90 hover:to-yellow-500/90"
+                className="w-full bg-gradient-to-r from-gold to-yellow-500 text-white font-bold hover:from-gold/90 hover:to-yellow-500/90"
               >
                 {loading ? "Saving..." : "Save Branding"}
               </Button>
