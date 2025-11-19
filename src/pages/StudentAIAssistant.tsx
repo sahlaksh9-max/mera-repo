@@ -554,7 +554,7 @@ export default function StudentAIAssistant() {
 
         <canvas ref={canvasRef} className="hidden" />
 
-        <div className="bg-gray-900 border-t border-gray-700 p-4 sticky bottom-0">
+        <div className="bg-gray-900 border-t-2 border-gray-700 p-6 sticky bottom-0">
           {imagePreviews.length > 0 && (
             <div className="mb-4 flex gap-2 flex-wrap">
               {imagePreviews.map((preview, idx) => (
@@ -580,7 +580,7 @@ export default function StudentAIAssistant() {
             </div>
           )}
 
-          <div className="flex gap-2">
+          <div className="flex gap-3 items-end">
             <input
               ref={fileInputRef}
               type="file"
@@ -590,42 +590,59 @@ export default function StudentAIAssistant() {
               multiple
             />
 
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => fileInputRef.current?.click()}
-              title="Upload image"
-              className="bg-gray-800 border-gray-600 text-white hover:bg-gray-700 shrink-0"
-            >
-              <Image className="w-5 h-5" />
-            </Button>
-
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={startCamera}
-              title="Take photo"
-              className="bg-gray-800 border-gray-600 text-white hover:bg-gray-700 shrink-0"
-            >
-              <Camera className="w-5 h-5" />
-            </Button>
-
-            <div className="flex items-center shrink-0">
-              <AudioRecorder
-                onRecordingComplete={handleAudioRecording}
-                audioTrackConstraints={{
-                  noiseSuppression: true,
-                  echoCancellation: true,
-                }}
-                downloadFileExtension="mp3"
-              />
+            {/* Plus icon with dropdown menu */}
+            <div className="relative group">
+              <Button
+                variant="outline"
+                size="icon"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 border-0 text-white shrink-0 h-12 w-12 transition-all duration-300 hover:scale-110"
+                title="Add attachments"
+              >
+                <Plus className="w-6 h-6" />
+              </Button>
+              
+              {/* Dropdown menu with animations */}
+              <div className="absolute bottom-full mb-2 left-0 hidden group-hover:block animate-in fade-in slide-in-from-bottom-2 duration-200">
+                <div className="bg-gray-800 rounded-lg shadow-lg border border-gray-700 p-2 space-y-1 min-w-[180px]">
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-white hover:bg-gray-700 transition-all duration-200"
+                    onClick={() => fileInputRef.current?.click()}
+                  >
+                    <Image className="w-4 h-4 mr-2" />
+                    Upload from Device
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-white hover:bg-gray-700 transition-all duration-200"
+                    onClick={startCamera}
+                  >
+                    <Camera className="w-4 h-4 mr-2" />
+                    Take Photo
+                  </Button>
+                  <div className="px-3 py-2">
+                    <AudioRecorder
+                      onRecordingComplete={handleAudioRecording}
+                      audioTrackConstraints={{
+                        noiseSuppression: true,
+                        echoCancellation: true,
+                      }}
+                      downloadFileExtension="mp3"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
 
             <Textarea
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               placeholder="Ask me anything... (Text, code, questions, analysis)"
-              className="flex-1 min-h-12 max-h-32 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 resize-none"
+              className="flex-1 min-h-[80px] max-h-48 bg-gray-800 border-2 border-gray-600 text-white placeholder:text-gray-400 resize-none rounded-xl p-4 text-base focus:border-blue-500 transition-all duration-200 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-700"
+              style={{
+                scrollbarWidth: 'thin',
+                scrollbarColor: '#3b82f6 #374151'
+              }}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
@@ -637,13 +654,13 @@ export default function StudentAIAssistant() {
             <Button
               onClick={handleSendMessage}
               disabled={isLoading || (!inputMessage.trim() && selectedImages.length === 0)}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shrink-0"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shrink-0 h-12 w-12 rounded-xl transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:hover:scale-100"
             >
               <Send className="w-5 h-5" />
             </Button>
           </div>
 
-          <p className="text-xs text-gray-400 mt-2 text-center">
+          <p className="text-xs text-gray-400 mt-3 text-center">
             Press Enter to send, Shift+Enter for new line
           </p>
         </div>

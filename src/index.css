@@ -810,6 +810,30 @@
     background: hsl(var(--gold) / 0.5);
   }
 
+  /* Textarea scrollbar styles */
+  .scrollbar-thumb-blue-500::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-thumb-blue-500::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 4px;
+  }
+
+  .scrollbar-thumb-blue-500::-webkit-scrollbar-thumb {
+    background: #3b82f6;
+    border-radius: 4px;
+    border: 2px solid #374151;
+  }
+
+  .scrollbar-thumb-blue-500::-webkit-scrollbar-thumb:hover {
+    background: #2563eb;
+  }
+
+  .scrollbar-track-gray-700::-webkit-scrollbar-track {
+    background: #374151;
+  }
+
   /* Force scrollbar visibility */
   .force-scrollbar {
     overflow-y: scroll !important;
