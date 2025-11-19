@@ -1649,69 +1649,77 @@
   /* AI Assistant mobile optimizations */
   /* Chat message text sizes for mobile */
   .prose {
-    font-size: 0.9375rem !important; /* 15px - comfortable reading size */
-    line-height: 1.6 !important;
+    font-size: 0.875rem !important; /* 14px - smaller for mobile */
+    line-height: 1.5 !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
     word-break: break-word !important;
   }
 
   .prose p {
-    font-size: 0.9375rem !important;
-    margin-bottom: 0.75rem !important;
+    font-size: 0.875rem !important;
+    margin-bottom: 0.5rem !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
   }
 
   .prose code {
-    font-size: 0.8125rem !important; /* 13px for inline code */
+    font-size: 0.75rem !important; /* 12px for inline code */
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
     white-space: pre-wrap !important;
+    padding: 0.125rem 0.25rem !important;
   }
 
   .prose pre {
-    font-size: 0.8125rem !important; /* 13px for code blocks */
-    padding: 0.75rem !important;
+    font-size: 0.6875rem !important; /* 11px for code blocks */
+    padding: 2.5rem 0.5rem 0.5rem 0.5rem !important;
     overflow-x: auto !important;
-    max-width: 100% !important;
-    margin-left: -0.75rem !important;
-    margin-right: -0.75rem !important;
+    max-width: calc(100vw - 4rem) !important;
+    margin-left: -0.5rem !important;
+    margin-right: -0.5rem !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
   }
 
   .prose pre code {
     white-space: pre !important;
     word-wrap: normal !important;
     overflow-wrap: normal !important;
+    font-size: 0.6875rem !important;
   }
 
   .prose h1 {
-    font-size: 1.125rem !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-  }
-
-  .prose h2 {
     font-size: 1rem !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .prose h2 {
+    font-size: 0.9375rem !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    margin-bottom: 0.5rem !important;
   }
 
   .prose h3 {
-    font-size: 0.9375rem !important;
+    font-size: 0.875rem !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
+    margin-bottom: 0.5rem !important;
   }
 
   .prose ul, .prose ol {
-    font-size: 0.9375rem !important;
+    font-size: 0.875rem !important;
     padding-left: 1rem !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
+    margin-bottom: 0.5rem !important;
   }
 
   .prose li {
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 0.25rem !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
   }

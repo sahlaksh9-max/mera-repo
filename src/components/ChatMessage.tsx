@@ -38,8 +38,8 @@ export const ChatMessage = ({ message, onEdit, onCancelEdit }: ChatMessageProps)
   };
 
   return (
-    <div className={`flex gap-4 p-4 rounded-lg ${message.role === "user" ? "bg-blue-900/30 border border-blue-700" : "bg-gray-900/50 border border-gray-700"}`}>
-      <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
+    <div className={`flex gap-2 sm:gap-4 p-2 sm:p-4 rounded-lg ${message.role === "user" ? "bg-blue-900/30 border border-blue-700" : "bg-gray-900/50 border border-gray-700"}`}>
+      <div className={`flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs ${
         message.role === "user"
           ? "bg-blue-600 text-white"
           : "bg-gradient-to-br from-purple-600 to-pink-600 text-white"
@@ -47,7 +47,7 @@ export const ChatMessage = ({ message, onEdit, onCancelEdit }: ChatMessageProps)
         {message.role === "user" ? "U" : "AI"}
       </div>
 
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 overflow-hidden">
         <div className="flex items-center gap-2 mb-2">
           <span className="font-semibold text-sm text-white">
             {message.role === "user" ? "You" : "AI Assistant"}
@@ -103,11 +103,11 @@ export const ChatMessage = ({ message, onEdit, onCancelEdit }: ChatMessageProps)
                   const isInline = !className;
 
                   return !isInline && match ? (
-                    <div className="relative group">
+                    <div className="relative group my-2">
                       <Button
                         size="sm"
                         variant="ghost"
-                        className="absolute right-1 top-1 z-10 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity bg-gray-800/90 hover:bg-gray-700/90 backdrop-blur-sm"
+                        className="absolute left-1 top-1 z-10 opacity-100 transition-opacity bg-gray-800/90 hover:bg-gray-700/90 backdrop-blur-sm"
                         onClick={() => copyToClipboard(codeString, codeId)}
                       >
                         {copied === codeId ? (
@@ -123,8 +123,11 @@ export const ChatMessage = ({ message, onEdit, onCancelEdit }: ChatMessageProps)
                         customStyle={{
                           margin: 0,
                           borderRadius: '0.5rem',
-                          fontSize: '0.8125rem',
+                          fontSize: '0.75rem',
+                          paddingTop: '2.5rem',
+                          overflowX: 'auto',
                         }}
+                        wrapLongLines={false}
                       >
                         {codeString}
                       </SyntaxHighlighter>
